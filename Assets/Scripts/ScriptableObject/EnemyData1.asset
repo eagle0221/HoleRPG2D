@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 362ea610f0b12374ba159c2997d62ba0, type: 3}
+  m_Name: EnemyData1
+  m_EditorClassIdentifier: 
+  enemyName: "\u65751"
+  dropItems:
+  - item: {fileID: 11400000, guid: a016306eb4594914fa58d3f0acd3b4a7, type: 2}
+    dropRate: 0.01
+  exp: 10
+  money: 1
+  enemyStatus:
+    maxHp: 1
+    hp: 1
+    absorbPower: 1
+    strength: 0
+    speed: 1
+    size: 9
+    attackSpeed: 1
