@@ -1,21 +1,25 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class AbsorbableObject : MonoBehaviour
 {
-    public AbsorbableObjectData objectData; // オブジェクトのデータ
+    public List<AbsorbableObjectData> objectDataList; // オブジェクトのデータ
+    private AbsorbableObjectData objectData; // オブジェクトのデータ
     private Transform player; // プレイヤーのTransform
     private bool isAbsorbing = false; // 吸収中かどうか
 
-    public void Initialize()
+    void Start()
     {
         // プレイヤーを検索して取得
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        Debug.Log("Initialize called");
         if(player == null)
         {
             Debug.Log("Player not found");
         }
+
         // objectDataから情報を初期化
+        int rnd = Random.Range(0, objectDataList.Count);
+        objectData = objectDataList[rnd];  // 登録したオブジェクトからランダム
         GetComponent<SpriteRenderer>().sprite = objectData.objectSprite;
         gameObject.tag = "AbsorbableObject";
     }
@@ -29,7 +33,7 @@ public class AbsorbableObject : MonoBehaviour
             transform.position += direction * objectData.moveSpeed * Time.deltaTime;
 
             // 縮小
-            transform.localScale -= Vector3.one * objectData.shrinkSpeed * Time.deltaTime;
+            transform.localScale -= Vector3.one * 2f * Time.deltaTime; // 縮小速度は適宜調整
 
             // 最小サイズ以下になったら、またはプレイヤーに近づいたら破壊
             if (transform.localScale.x <= objectData.minScale || Vector3.Distance(transform.position, player.position) <= objectData.destroyDistance)

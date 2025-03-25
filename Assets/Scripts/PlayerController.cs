@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // プレイヤーのステータスを更新するメソッド
-    void UpdatePlayerStatus()
+    public void UpdatePlayerStatus()
     {
         // プレイヤーのサイズを更新
         transform.localScale = Vector3.one * status.size;
@@ -327,7 +327,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // ステータス表示を更新
-    void UpdateStatusText()
+    public void UpdateStatusText()
     {
         hpText.text = "HP: " + status.hp.ToString() + " / " + status.maxHp.ToString();
         absorbPowerText.text = "吸収力: " + status.absorbPower.ToString("F1");
@@ -404,6 +404,36 @@ public class PlayerController : MonoBehaviour
         UpdatePlayerStatus(); // 装備効果を適用後にプレイヤーのステータスを更新
     }
     
+    // 装備解除処理
+    public void UnEquip(EquipmentItem item)
+    {
+        switch (item.equipmentType)
+        {
+            case EquipmentItem.EquipmentType.AbsorbPower:
+                status.absorbPower -= item.value;
+                break;
+            case EquipmentItem.EquipmentType.Strength:
+                status.strength -= item.value;
+                break;
+            case EquipmentItem.EquipmentType.Speed:
+                status.speed -= item.value;
+                break;
+            case EquipmentItem.EquipmentType.Size:
+                status.size -= item.value;
+                status.size = Mathf.Clamp(status.size, 1f, 500f); // 最大値を500に制限
+                UpdatePlayerStatus(); // サイズ変更を反映
+                break;
+            case EquipmentItem.EquipmentType.Attraction:
+                status.attraction -= item.value;
+                break;
+            case EquipmentItem.EquipmentType.AttackSpeed:
+                status.attackSpeed -= item.value;
+                break;
+        }
+        UpdateStatusText();
+        UpdatePlayerStatus(); // 装備効果を適用後にプレイヤーのステータスを更新
+    }
+
     public void AddMoney(int amount)
     {
         money += amount;

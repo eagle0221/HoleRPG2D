@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8756ce56a4bcc18459312060c1852926, type: 3}
   m_Name: AbsorbableObjectData1
   m_EditorClassIdentifier: 
-  objectName: "\u65751"
-  objectSprite: {fileID: -174417076182803540, guid: c00ef2fff0cd0d84e9f6f2b70c788726, type: 3}
-  moveSpeed: 5
+  objectName: "\u5C0F\u3055\u3044\u6728"
+  objectSprite: {fileID: -1124676803, guid: a0b81a7c32fe9b9409745516c6eccc5d, type: 3}
+  moveSpeed: 2
   shrinkSpeed: 2
   minScale: 0.1
   destroyDistance: 0.5

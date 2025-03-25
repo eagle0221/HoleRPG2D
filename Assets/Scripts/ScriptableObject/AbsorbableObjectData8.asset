@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8756ce56a4bcc18459312060c1852926, type: 3}
-  m_Name: AbsorbableObjectData4
+  m_Name: AbsorbableObjectData8
   m_EditorClassIdentifier: 
-  objectName: "\u5C0F\u3055\u3044\u5CA9"
-  objectSprite: {fileID: 1942072, guid: a0b81a7c32fe9b9409745516c6eccc5d, type: 3}
+  objectName: "\u7ACB\u672D"
+  objectSprite: {fileID: -1749375346, guid: a0b81a7c32fe9b9409745516c6eccc5d, type: 3}
   moveSpeed: 2
   shrinkSpeed: 2
   minScale: 0.1

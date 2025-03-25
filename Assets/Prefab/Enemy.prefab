@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2520735692948370355}
   - component: {fileID: 3924972363758527186}
   - component: {fileID: 4508495242884300931}
-  - component: {fileID: 4320013606846938674}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -88,7 +87,7 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &2520735692948370355
@@ -170,16 +169,3 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 32d914b10ccb95a42a4d7a3d812349b9, type: 2}
   equipmentObjectPrefab: {fileID: 5776303842293369613, guid: 9cc5bc8c5d2c08c45bf915da42f96752, type: 3}
   damageTextPrefab: {fileID: 4241401722547147461, guid: 872de3b2624befd4899408d92bf04eb0, type: 3}
---- !u!114 &4320013606846938674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6808867673518432313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38b965759b0565048b47a38bfec68d0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectData: {fileID: 11400000, guid: 303fad8592045ed4b8123e7122084102, type: 2}

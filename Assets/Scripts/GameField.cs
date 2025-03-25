@@ -21,7 +21,7 @@ public class GameField : MonoBehaviour
     public List<GameObject> objectPrefabs; // オブジェクトのプレハブのリスト
     public List<AbsorbableObjectData> objectDatas; // オブジェクトのデータのリスト
     public float objectSpawnInterval = 2f; // オブジェクトの生成間隔
-    private float objectSpawnTimer = 0f; // オブジェクトの生成タイマー
+    //private float objectSpawnTimer = 0f; // オブジェクトの生成タイマー
 
     private void Awake()
     {
@@ -46,6 +46,7 @@ public class GameField : MonoBehaviour
             enemySpawnTimer = 0f;
         }
 
+/*
         // オブジェクトの生成
         objectSpawnTimer += Time.deltaTime;
         if (objectSpawnTimer >= objectSpawnInterval)
@@ -53,6 +54,7 @@ public class GameField : MonoBehaviour
             SpawnObject();
             objectSpawnTimer = 0f;
         }
+*/
     }
 
     // 敵を生成するメソッド
@@ -76,6 +78,7 @@ public class GameField : MonoBehaviour
         enemyController.Initialize(); // Initializeメソッドを呼び出す
     }
 
+/*
     // オブジェクトを生成するメソッド
     void SpawnObject()
     {
@@ -94,6 +97,7 @@ public class GameField : MonoBehaviour
         absorbableObject.objectData = objectDatas[objectDataIndex];
         absorbableObject.Initialize();
     }
+*/
 
     // ランダムな生成位置を取得するメソッド
     Vector2 GetRandomSpawnPosition()
@@ -115,7 +119,6 @@ public class GameField : MonoBehaviour
     {
         float clampedX = Mathf.Clamp(position.x, minX, maxX);
         float clampedY = Mathf.Clamp(position.y, minY, maxY);
-        Debug.Log("clampedX: " + clampedX + ", clampedY: " + clampedY);
         return new Vector2(clampedX, clampedY);
     }
 
