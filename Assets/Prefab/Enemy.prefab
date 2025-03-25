@@ -80,12 +80,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: 4cad243c6ef53c8479357e7950b8a5bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -169,7 +169,6 @@ MonoBehaviour:
   moveSpeed: 2
   enemyData: {fileID: 11400000, guid: 32d914b10ccb95a42a4d7a3d812349b9, type: 2}
   equipmentObjectPrefab: {fileID: 5776303842293369613, guid: 9cc5bc8c5d2c08c45bf915da42f96752, type: 3}
-  canvas: {fileID: 0}
   damageTextPrefab: {fileID: 4241401722547147461, guid: 872de3b2624befd4899408d92bf04eb0, type: 3}
 --- !u!114 &4320013606846938674
 MonoBehaviour:
@@ -183,7 +182,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b965759b0565048b47a38bfec68d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  shrinkSpeed: 2
-  minScale: 0.1
-  destroyDistance: 0.5
+  objectData: {fileID: 11400000, guid: 303fad8592045ed4b8123e7122084102, type: 2}

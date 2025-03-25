@@ -5,7 +5,6 @@ public class ObjectSpawner : MonoBehaviour
     public GameObject objectToSpawn;
     public float spawnInterval = 2f;
     private float timer = 0f;
-    public Canvas canvas; // Canvasへの参照を追加
 
     void Update()
     {
@@ -25,6 +24,6 @@ public class ObjectSpawner : MonoBehaviour
         Vector2 spawnPosition = new Vector2(randomX, randomY);
 
         // オブジェクトを生成
-        Instantiate(objectToSpawn, spawnPosition, Quaternion.identity, canvas.transform);
+        Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
     }
 }

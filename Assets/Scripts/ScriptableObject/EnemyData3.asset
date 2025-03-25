@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 362ea610f0b12374ba159c2997d62ba0, type: 3}
-  m_Name: EnemyData1
+  m_Name: EnemyData3
   m_EditorClassIdentifier: 
-  enemyName: "\u65751"
+  enemyName: "\u65753"
   enemyStatus:
     maxHp: 1
     hp: 1
@@ -21,9 +21,7 @@ MonoBehaviour:
     speed: 1
     size: 1
     attackSpeed: 1
-  dropItems:
-  - item: {fileID: 11400000, guid: a016306eb4594914fa58d3f0acd3b4a7, type: 2}
-    dropRate: 0.01
+  dropItems: []
   exp: 10
   money: 1
-  enemySprite: {fileID: -174417076182803540, guid: c00ef2fff0cd0d84e9f6f2b70c788726, type: 3}
+  enemySprite: {fileID: 0}

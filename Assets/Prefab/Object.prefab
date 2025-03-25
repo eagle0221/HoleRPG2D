@@ -178,7 +178,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b965759b0565048b47a38bfec68d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  shrinkSpeed: 2
-  minScale: 0.1
-  destroyDistance: 0.5
+  objectData: {fileID: 11400000, guid: c3d6816278382ad4f8e8f79551f6c091, type: 2}

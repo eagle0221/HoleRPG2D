@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Boss
   - Equipment
+  - EquipItem
+  - AbsorbableObject
   layers:
   - Default
   - TransparentFX

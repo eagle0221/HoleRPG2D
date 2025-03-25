@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: "\u88C5\u50993"
   equipmentType: 3
   value: 10
-  itemIcon: {fileID: 21300000, guid: e6a2b8e83619fd74abdd337c7e33e630, type: 3}
+  itemIcon: {fileID: 21300000, guid: 0ba9b862a31b1604199e1682d1860a2a, type: 3}

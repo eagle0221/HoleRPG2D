@@ -31,12 +31,9 @@ public class PlayerController : MonoBehaviour
     public float invincibilityTime = 1f; // 無敵時間
     private float invincibilityTimer = 0f; // 無敵タイマー
     private bool isInvincible = false; // 無敵状態かどうか
-    //private float attackTimer = 0f; // 攻撃タイマー
     public Slider attackSpeedSlider; // 攻撃スピード表示用Sliderを追加
-    //private bool isEnemyInRange = false; // 敵が攻撃範囲内にいるかどうか
     private List<EnemyController> enemiesInRange = new List<EnemyController>(); // 攻撃範囲内の敵を管理するリスト
     private EnemyController targetEnemy; // 攻撃対象の敵
-    public GameObject enemyPrefab; // 敵のプレハブ
     public Canvas canvas; // Canvasへの参照を追加
     public Button rebirthButton; // 転生ボタンへの参照を追加
 
@@ -98,12 +95,6 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
         KeepPlayerInBounds(); // プレイヤーを範囲内に保つ処理を追加
-        // 敵を生成する処理
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // 敵を生成
-            GameObject enemy = Instantiate(enemyPrefab, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform); // Canvasを親オブジェクトに設定
-        }
     }
 
     void HandleInput()
@@ -144,7 +135,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Object"))
+        if (other.CompareTag("AbsorbableObject"))
         {
             // 吸収可能なオブジェクトかどうか確認
             AbsorbableObject absorbable = other.GetComponent<AbsorbableObject>();
@@ -152,14 +143,18 @@ public class PlayerController : MonoBehaviour
             {
                 // 吸収開始
                 absorbable.StartAbsorbing();
-                AddExp(10f); // 経験値を追加
             }
         }
 
         if (other.CompareTag("Enemy"))
         {
             EnemyController enemy = other.GetComponent<EnemyController>();
-            if (enemy != null)
+            // 吸収可能なオブジェクトかどうか確認
+            if(status.size > enemy.enemyData.enemyStatus.size)
+            {
+                enemy.StartAbsorbing();
+            }
+            else if (enemy != null)
             {
                 enemiesInRange.Add(enemy); // 攻撃範囲内の敵リストに追加
             }
@@ -167,9 +162,20 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Equipment"))
         {
+            Debug.Log("Tag:Equipment");
             EquipmentItem item = other.GetComponent<EquipmentObject>().item;
             inventory.AddItem(item);
-            Destroy(other.gameObject);
+            // 吸収可能なオブジェクトかどうか確認
+            AbsorbableObject absorbable = other.GetComponent<AbsorbableObject>();
+            if (absorbable != null)
+            {
+                // 吸収開始
+                absorbable.StartAbsorbing();
+            }
+            else
+            {
+                Destroy(other.gameObject);
+            }
         }
     }
 
@@ -303,7 +309,7 @@ public class PlayerController : MonoBehaviour
                     status.speed += 0.1f;
                     break;
                 case "Size":
-                    status.size += 1f; // 1ずつ増加
+                    status.size += 0.1f; // 1ずつ増加
                     status.size = Mathf.Clamp(status.size, 1f, 500f); // 最大値を500に制限
                     UpdatePlayerStatus(); // サイズ変更を反映
                     break;

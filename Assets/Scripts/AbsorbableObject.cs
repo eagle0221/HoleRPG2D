@@ -2,17 +2,22 @@ using UnityEngine;
 
 public class AbsorbableObject : MonoBehaviour
 {
-    public float moveSpeed = 5f; // 引き寄せられる速度
-    public float shrinkSpeed = 2f; // 縮小する速度
-    public float minScale = 0.1f; // 最小サイズ
-    public float destroyDistance = 0.5f; // 破壊される距離
+    public AbsorbableObjectData objectData; // オブジェクトのデータ
     private Transform player; // プレイヤーのTransform
     private bool isAbsorbing = false; // 吸収中かどうか
 
-    void Start()
+    public void Initialize()
     {
         // プレイヤーを検索して取得
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        Debug.Log("Initialize called");
+        if(player == null)
+        {
+            Debug.Log("Player not found");
+        }
+        // objectDataから情報を初期化
+        GetComponent<SpriteRenderer>().sprite = objectData.objectSprite;
+        gameObject.tag = "AbsorbableObject";
     }
 
     void Update()
@@ -21,15 +26,15 @@ public class AbsorbableObject : MonoBehaviour
         {
             // プレイヤーに向かって移動
             Vector3 direction = (player.position - transform.position).normalized;
-            transform.position += direction * moveSpeed * Time.deltaTime;
+            transform.position += direction * objectData.moveSpeed * Time.deltaTime;
 
             // 縮小
-            transform.localScale -= Vector3.one * shrinkSpeed * Time.deltaTime;
+            transform.localScale -= Vector3.one * objectData.shrinkSpeed * Time.deltaTime;
 
             // 最小サイズ以下になったら、またはプレイヤーに近づいたら破壊
-            if (transform.localScale.x <= minScale || Vector3.Distance(transform.position, player.position) <= destroyDistance)
+            if (transform.localScale.x <= objectData.minScale || Vector3.Distance(transform.position, player.position) <= objectData.destroyDistance)
             {
-                Destroy(gameObject);
+                Absorb();
             }
         }
     }
@@ -38,5 +43,17 @@ public class AbsorbableObject : MonoBehaviour
     public void StartAbsorbing()
     {
         isAbsorbing = true;
+    }
+
+    // 吸収された時の処理
+    private void Absorb()
+    {
+        // 経験値を加算
+        PlayerController playerController = FindAnyObjectByType<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.AddExp(objectData.exp);
+        }
+        Destroy(gameObject);
     }
 }

@@ -10,10 +10,8 @@ public class EnemyController : MonoBehaviour
     private EnemyStatus status; // 敵のステータス
     private float attackTimer = 0f; // 攻撃タイマー
     private float attackInterval = 0f; // 攻撃間隔
-
-    public Canvas canvas; // Canvasへの参照を追加
-
     public GameObject damageTextPrefab; // ダメージテキストのプレハブを追加
+    private bool isAbsorbing = false; // 吸収中かどうか
 
     void Start()
     {
@@ -21,17 +19,10 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
 
-        // Canvasを取得
-        canvas = FindAnyObjectByType<Canvas>();
-        if (canvas == null)
-        {
-            Debug.LogError("Canvasが見つかりません!");
-        }
-
         // EnemyDataからステータスを初期化
         if (enemyData != null)
         {
-            status = new EnemyStatus(enemyData.enemyStatus.maxHp, enemyData.enemyStatus.absorbPower, enemyData.enemyStatus.strength, enemyData.enemyStatus.speed, enemyData.enemyStatus.size, enemyData.enemyStatus.attackSpeed);
+            status = new EnemyStatus(enemyData.enemyStatus.maxHp, enemyData.enemyStatus.maxHp, enemyData.enemyStatus.absorbPower, enemyData.enemyStatus.strength, enemyData.enemyStatus.speed, enemyData.enemyStatus.size, enemyData.enemyStatus.attackSpeed, enemyData.enemyStatus.minScale, enemyData.enemyStatus.destroyDistance);
             UpdateEnemyStatus(); // 初期サイズを適用
         }
         else
@@ -52,14 +43,35 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        MoveTowardsPlayer();
-        attackTimer += Time.deltaTime;
-    }
+         if (isAbsorbing)
+        {
+            // プレイヤーに向かって移動
+            Vector3 direction = (player.position - transform.position).normalized;
+            transform.position += direction * status.speed * Time.deltaTime;
+
+            // 縮小
+            transform.localScale -= Vector3.one * 2f * Time.deltaTime; // 縮小速度は適宜調整
+
+            // 最小サイズ以下になったら、またはプレイヤーに近づいたら破壊
+            if (transform.localScale.x <= status.minScale || Vector3.Distance(transform.position, player.position) <= status.destroyDistance)
+            {
+                Absorb();
+            }
+        }
+        else
+        {
+            MoveTowardsPlayer();
+            attackTimer += Time.deltaTime;
+        }
+   }
 
     void FixedUpdate()
     {
         // プレイヤーに向かって移動
-        MoveTowardsPlayer();
+        if (!isAbsorbing)
+        {
+            MoveTowardsPlayer();
+        }
     }
 
     void MoveTowardsPlayer()
@@ -85,9 +97,11 @@ public class EnemyController : MonoBehaviour
             if (randomValue <= dropItemData.dropRate)
             {
                 // ドロップする
-                GameObject dropItemObject = Instantiate(equipmentObjectPrefab, transform.position, Quaternion.identity, canvas.transform);
+                GameObject dropItemObject = Instantiate(equipmentObjectPrefab, transform.position, Quaternion.identity);
                 EquipmentObject equipmentObject = dropItemObject.GetComponent<EquipmentObject>();
                 equipmentObject.item = dropItemData.item;
+                // ここでアイテムオブジェクトにタグを設定
+                dropItemObject.tag = "Equipment";
             }
         }
         // お金をドロップ
@@ -119,7 +133,7 @@ public class EnemyController : MonoBehaviour
         if (damageTextPrefab != null)
         {
             // ダメージテキストを生成
-            GameObject damageTextObject = Instantiate(damageTextPrefab, transform.position, Quaternion.identity, canvas.transform); // Canvasを親オブジェクトに設定
+            GameObject damageTextObject = Instantiate(damageTextPrefab, transform.position, Quaternion.identity, this.transform);
             // ダメージテキストのスクリプトを取得
             DamageText damageText = damageTextObject.GetComponent<DamageText>();
             // ダメージテキストにダメージ量を設定
@@ -156,5 +170,30 @@ public class EnemyController : MonoBehaviour
                 attackTimer = 0f;
             }
         }
+    }
+    
+    // 吸収を開始するメソッド
+    public void StartAbsorbing()
+    {
+        isAbsorbing = true;
+    }
+
+    // 吸収された時の処理
+    private void Absorb()
+    {
+        // 経験値を加算
+        PlayerController playerController = FindAnyObjectByType<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.AddExp(enemyData.exp);
+        }
+        Destroy(gameObject);
+    }
+
+    public void Initialize()
+    {
+        // EnemyDataから情報を初期化
+        GetComponent<SpriteRenderer>().sprite = enemyData.enemySprite;
+        gameObject.tag = "Enemy";
     }
 }
