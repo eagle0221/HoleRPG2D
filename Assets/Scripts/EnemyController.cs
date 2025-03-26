@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     private float attackInterval = 0f; // 攻撃間隔
     public GameObject damageTextPrefab; // ダメージテキストのプレハブを追加
     private bool isAbsorbing = false; // 吸収中かどうか
+    public ItemDropUIController itemDropUIController; // ItemDropUIControllerへの参照を追加
 
     void Start()
     {
@@ -30,6 +31,12 @@ public class EnemyController : MonoBehaviour
             Debug.LogError("EnemyDataが設定されていません!");
         }
         attackInterval = 1f / status.attackSpeed;
+        // ItemDropUIControllerを取得
+        itemDropUIController = FindAnyObjectByType<ItemDropUIController>();
+        if (itemDropUIController == null)
+        {
+            Debug.LogError("ItemDropUIControllerが見つかりません!");
+        }
     }
 
     // 敵のステータスを更新するメソッド
@@ -102,6 +109,21 @@ public class EnemyController : MonoBehaviour
                 equipmentObject.item = dropItemData.item;
                 // ここでアイテムオブジェクトにタグを設定
                 dropItemObject.tag = "Equipment";
+
+                // ドロップアイテムを表示
+                if (itemDropUIController != null)
+                {
+                    if(dropItemData.item == null)
+                    {
+                        Debug.Log("dropItemData.itemが設定されていません!");
+                    }
+                    if(transform.position == null)
+                    {
+                        Debug.Log("transform.positionが設定されていません!");
+                    }
+                    Debug.Log("DropItem called with item: " + (dropItemData.item != null ? dropItemData.item.itemName : "null") + ", position: " + transform.position);
+                    itemDropUIController.ShowItemDrop(dropItemData.item, transform.position);
+                }
             }
         }
         // お金をドロップ

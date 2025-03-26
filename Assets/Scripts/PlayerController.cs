@@ -164,7 +164,6 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Equipment"))
         {
-            Debug.Log("Tag:Equipment");
             EquipmentItem item = other.GetComponent<EquipmentObject>().item;
             inventory.AddItem(item); // インベントリにアイテムを追加
             // 吸収可能なオブジェクトかどうか確認
