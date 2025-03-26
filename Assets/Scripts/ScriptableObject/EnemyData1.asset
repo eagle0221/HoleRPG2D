@@ -21,9 +21,11 @@ MonoBehaviour:
     speed: 1
     size: 1
     attackSpeed: 1
+    minScale: 0
+    destroyDistance: 0
   dropItems:
   - item: {fileID: 11400000, guid: a016306eb4594914fa58d3f0acd3b4a7, type: 2}
-    dropRate: 0.01
+    dropRate: 100000
   exp: 10
   money: 1
   enemySprite: {fileID: -174417076182803540, guid: c00ef2fff0cd0d84e9f6f2b70c788726, type: 3}

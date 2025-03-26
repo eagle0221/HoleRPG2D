@@ -16,3 +16,4 @@ MonoBehaviour:
   equipmentType: 0
   value: 10
   itemIcon: {fileID: 21300000, guid: 52fbe0482b7add148ac7b1d28b04842d, type: 3}
+  effectDescription: "\u5438\u53CE\u529B\uFF0B10"

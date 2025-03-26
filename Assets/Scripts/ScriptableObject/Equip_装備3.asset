@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: "Equip_\u88C5\u50993"
   m_EditorClassIdentifier: 
   itemName: "\u88C5\u50993"
-  equipmentType: 3
+  equipmentType: 2
   value: 10
   itemIcon: {fileID: 21300000, guid: 0ba9b862a31b1604199e1682d1860a2a, type: 3}
+  effectDescription: "\u30B9\u30D4\u30FC\u30C9\uFF0B10"

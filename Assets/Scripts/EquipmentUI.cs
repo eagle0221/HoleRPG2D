@@ -17,6 +17,8 @@ public class EquipmentUI : MonoBehaviour
     public GameObject openEquipment;
     private EquipmentItem selectedItem;
     private EquipmentItem[] equipmentItems;
+    public TextMeshProUGUI[] equipmentsName = new TextMeshProUGUI[2]; // 装備スロット（2つ）
+    public TextMeshProUGUI[] equipmentsText = new TextMeshProUGUI[2]; // 装備スロット（2つ）
 
     void Start()
     {
@@ -30,6 +32,8 @@ public class EquipmentUI : MonoBehaviour
             int slotIndex = i; // クロージャ対策
             equipmentButtons[i].onClick.AddListener(() => OnReleaseEquipmentButton(slotIndex));
         }
+        // インベントリの変更イベントを購読
+        player.inventory.OnInventoryChanged += UpdateItemList;
     }
 
     public void OpenEquipmentPanel()
@@ -74,12 +78,18 @@ public class EquipmentUI : MonoBehaviour
                 equipmentSlots[i].sprite = player.equipments[i].itemIcon;
                 equipmentSlots[i].color = new Color(1, 1, 1, 1); // スプライトを表示
                 equipmentButtons[i].interactable = true; // 装備されているのでReleaseボタンを活性化
+                // 装備名と効果の説明をUIに表示
+                equipmentsName[i].text = player.equipments[i].itemName;
+                equipmentsText[i].text = player.equipments[i].effectDescription;
             }
             else
             {
                 equipmentSlots[i].sprite = null;
                 equipmentSlots[i].color = new Color(1, 1, 1, 0); // スプライトを非表示
                 equipmentButtons[i].interactable = false; // 装備されていないのでReleaseボタンを非活性化
+                // 装備名と効果の説明をUIから削除
+                equipmentsName[i].text = "";
+                equipmentsText[i].text = "";
             }
         }
     }
@@ -110,17 +120,22 @@ public class EquipmentUI : MonoBehaviour
 
     public void EquipItem()
     {
+        bool childRet = false;
         if (selectedItem != null)
         {
             for (int i = 0; i < player.equipments.Length; i++)
             {
                 if (player.equipments[i] == null)
                 {
-            player.Equip(selectedItem);
-            player.inventory.RemoveItem(selectedItem);
-            selectedItem = null;
-            UpdateItemList();
-            UpdateEquipmentSlots();
+                    childRet = player.Equip(selectedItem);
+                    if(childRet)  // 装備成功
+                    {
+                        // インベントリからアイテムを削除
+                        player.inventory.RemoveItem(selectedItem);
+                    }
+                    selectedItem = null;
+                    UpdateItemList();
+                    UpdateEquipmentSlots();
                     return;
                 }
             }

@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 263762804}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -662,7 +662,7 @@ GameObject:
   - component: {fileID: 53500889}
   - component: {fileID: 53500888}
   m_Layer: 5
-  m_Name: EquipmentSlot1Text
+  m_Name: EquipmentNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -707,7 +707,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 991b87f7f54e09447ba2afc91fb34bf5, type: 2}
   m_sharedMaterial: {fileID: -2422757581339704024, guid: 991b87f7f54e09447ba2afc91fb34bf5, type: 2}
@@ -3605,7 +3605,7 @@ GameObject:
   - component: {fileID: 640266205}
   - component: {fileID: 640266204}
   m_Layer: 5
-  m_Name: EquipmentSlot1EffectText
+  m_Name: EquipmentEffectText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3650,7 +3650,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 991b87f7f54e09447ba2afc91fb34bf5, type: 2}
   m_sharedMaterial: {fileID: -2422757581339704024, guid: 991b87f7f54e09447ba2afc91fb34bf5, type: 2}
@@ -4222,7 +4222,7 @@ GameObject:
   - component: {fileID: 752578762}
   - component: {fileID: 752578761}
   m_Layer: 5
-  m_Name: EquipmentSlot2Button
+  m_Name: ReleaseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4625,6 +4625,12 @@ MonoBehaviour:
   closeButton: {fileID: 1059020625}
   openEquipmentButton: {fileID: 8944433889580468633}
   openEquipment: {fileID: 2568485097575124923}
+  equipmentsName:
+  - {fileID: 53500888}
+  - {fileID: 1018643466}
+  equipmentsText:
+  - {fileID: 640266204}
+  - {fileID: 1029199520}
 --- !u!1001 &824596905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4786,7 +4792,7 @@ GameObject:
   - component: {fileID: 854519459}
   - component: {fileID: 854519458}
   m_Layer: 5
-  m_Name: EquipmentSlot1Button
+  m_Name: ReleaseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5463,7 +5469,7 @@ GameObject:
   - component: {fileID: 1018643467}
   - component: {fileID: 1018643466}
   m_Layer: 5
-  m_Name: EquipmentSlot2Text
+  m_Name: EquipmentNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5508,7 +5514,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 991b87f7f54e09447ba2afc91fb34bf5, type: 2}
   m_sharedMaterial: {fileID: -2422757581339704024, guid: 991b87f7f54e09447ba2afc91fb34bf5, type: 2}
@@ -5599,7 +5605,7 @@ GameObject:
   - component: {fileID: 1029199521}
   - component: {fileID: 1029199520}
   m_Layer: 5
-  m_Name: EquipmentSlot2EffectText
+  m_Name: EquipmentEffectText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5644,7 +5650,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 991b87f7f54e09447ba2afc91fb34bf5, type: 2}
   m_sharedMaterial: {fileID: -2422757581339704024, guid: 991b87f7f54e09447ba2afc91fb34bf5, type: 2}
@@ -6063,7 +6069,7 @@ GameObject:
   - component: {fileID: 1101631651}
   - component: {fileID: 1101631650}
   m_Layer: 5
-  m_Name: EquipmentSlot2Image
+  m_Name: EquipmentSlotImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37573,7 +37579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 1905656783}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -37912,7 +37918,7 @@ GameObject:
   - component: {fileID: 1648030756}
   - component: {fileID: 1648030755}
   m_Layer: 5
-  m_Name: EquipmentSlot1Image
+  m_Name: EquipmentSlotImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40034,8 +40040,14 @@ MonoBehaviour:
   equipments:
   - {fileID: 0}
   - {fileID: 0}
+  equipmentsName:
+  - {fileID: 53500888}
+  - {fileID: 1018643466}
+  equipmentsText:
+  - {fileID: 640266204}
+  - {fileID: 1029199520}
   inventory: {fileID: 0}
-  money: 0
+  money: 100000
   invincibilityTime: 1
   attackSpeedSlider: {fileID: 7443746423506227906}
   canvas: {fileID: 970837502}
@@ -40544,5 +40556,5 @@ SceneRoots:
   - {fileID: 416538255}
   - {fileID: 1333140259}
   - {fileID: 3907794246184030651}
-  - {fileID: 970837503}
   - {fileID: 1084487387}
+  - {fileID: 970837503}

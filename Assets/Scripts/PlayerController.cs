@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI attackSpeedText;
     public TextMeshProUGUI moneyText; // 所持金表示用テキスト
     public EquipmentItem[] equipments = new EquipmentItem[2]; // 装備スロット（2つ）
+    public TextMeshProUGUI[] equipmentsName = new TextMeshProUGUI[2]; // 装備スロット（2つ）
+    public TextMeshProUGUI[] equipmentsText = new TextMeshProUGUI[2]; // 装備スロット（2つ）
     public Inventory inventory; // インベントリへの参照を追加
     public int money = 0; // 所持金
     public float invincibilityTime = 1f; // 無敵時間
@@ -164,7 +166,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Tag:Equipment");
             EquipmentItem item = other.GetComponent<EquipmentObject>().item;
-            inventory.AddItem(item);
+            inventory.AddItem(item); // インベントリにアイテムを追加
             // 吸収可能なオブジェクトかどうか確認
             AbsorbableObject absorbable = other.GetComponent<AbsorbableObject>();
             if (absorbable != null)
@@ -346,6 +348,7 @@ public class PlayerController : MonoBehaviour
         expSlider.value = status.currentExp;
         levelText.text = "Lv: " + status.level.ToString();
         statusPointText.text = "SP: " + status.statusPoint.ToString(); //ステータスポイントの表示を更新
+        UpdateMoneyUI();
         //rebirthPointText.text = "RP: " + status.rebirthPoint.ToString(); // 転生ポイントの表示を削除
     }
 
@@ -360,7 +363,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // 装備処理
-    public void Equip(EquipmentItem item)
+    public bool Equip(EquipmentItem item)
     {
         for (int i = 0; i < equipments.Length; i++)
         {
@@ -368,10 +371,14 @@ public class PlayerController : MonoBehaviour
             {
                 equipments[i] = item;
                 ApplyEquipmentEffect(item);
-                return;
+                // 装備名と効果の説明をUIに表示
+                equipmentsName[i].text = item.itemName;
+                equipmentsText[i].text = item.effectDescription;
+                return true;
             }
         }
         Debug.Log("装備スロットがいっぱいです");
+        return false;
     }
 
     // 装備効果を適用
@@ -432,6 +439,16 @@ public class PlayerController : MonoBehaviour
         }
         UpdateStatusText();
         UpdatePlayerStatus(); // 装備効果を適用後にプレイヤーのステータスを更新
+        for (int i = 0; i < equipments.Length; i++)
+        {
+            if (equipments[i] == item)
+            {
+                // 装備名と効果の説明をUIから削除
+                equipmentsName[i].text = "";
+                equipmentsText[i].text = "";
+                break;
+            }
+        }
     }
 
     public void AddMoney(int amount)
