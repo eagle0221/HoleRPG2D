@@ -37,6 +37,8 @@ public class EnemyController : MonoBehaviour
         {
             Debug.LogError("ItemDropUIControllerが見つかりません!");
         }
+        attackInterval = 1f / status.attackSpeed; // 攻撃間隔を攻撃スピードから計算
+        Debug.Log(gameObject.GetComponent<SpriteRenderer>().sprite.name);
     }
 
     // 敵のステータスを更新するメソッド
@@ -78,6 +80,7 @@ public class EnemyController : MonoBehaviour
         if (!isAbsorbing)
         {
             MoveTowardsPlayer();
+            attackTimer += Time.deltaTime; // 攻撃タイマーを更新
         }
     }
 
@@ -113,11 +116,11 @@ public class EnemyController : MonoBehaviour
                 // ドロップアイテムを表示
                 if (itemDropUIController != null)
                 {
-                    if(dropItemData.item == null)
+                    if (dropItemData.item == null)
                     {
                         Debug.Log("dropItemData.itemが設定されていません!");
                     }
-                    if(transform.position == null)
+                    if (transform.position == null)
                     {
                         Debug.Log("transform.positionが設定されていません!");
                     }
@@ -173,7 +176,8 @@ public class EnemyController : MonoBehaviour
         {
             player.AddExp(enemyData.exp); // 敵のデータから経験値を取得して加算
         }
-        Destroy(gameObject);
+        // 倒れたら吸収演出を開始
+        StartAbsorbing();
     }
 
     // プレイヤーとの衝突判定
@@ -198,6 +202,7 @@ public class EnemyController : MonoBehaviour
     public void StartAbsorbing()
     {
         isAbsorbing = true;
+        rb.linearVelocity = Vector2.zero; // 吸収開始時に移動を停止
     }
 
     // 吸収された時の処理
@@ -217,5 +222,6 @@ public class EnemyController : MonoBehaviour
         // EnemyDataから情報を初期化
         GetComponent<SpriteRenderer>().sprite = enemyData.enemySprite;
         gameObject.tag = "Enemy";
+        isAbsorbing = false; // 初期化時に吸収中でないことを確認
     }
 }
