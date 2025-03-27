@@ -461,7 +461,9 @@ public class PlayerController : MonoBehaviour
     {
         if (!isInvincible)
         {
-            status.hp -= damage;
+            // 防御力を考慮してダメージを計算
+            float actualDamage = Mathf.Max(0, damage - status.strength);
+            status.hp -= actualDamage;
             UpdateStatusText(); // UIを更新
             if (status.hp <= 0)
             {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class EnemyController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class EnemyController : MonoBehaviour
     public GameObject damageTextPrefab; // ダメージテキストのプレハブを追加
     private bool isAbsorbing = false; // 吸収中かどうか
     public ItemDropUIController itemDropUIController; // ItemDropUIControllerへの参照を追加
+    private List<PlayerController> playersInRange = new List<PlayerController>(); // 攻撃範囲内のプレイヤーを管理するリスト
+    private bool isAttacking = false; // 攻撃中かどうか
 
     void Start()
     {
@@ -38,7 +41,6 @@ public class EnemyController : MonoBehaviour
             Debug.LogError("ItemDropUIControllerが見つかりません!");
         }
         attackInterval = 1f / status.attackSpeed; // 攻撃間隔を攻撃スピードから計算
-        Debug.Log(gameObject.GetComponent<SpriteRenderer>().sprite.name);
     }
 
     // 敵のステータスを更新するメソッド
@@ -71,6 +73,11 @@ public class EnemyController : MonoBehaviour
         {
             MoveTowardsPlayer();
             attackTimer += Time.deltaTime;
+            // 攻撃範囲内にプレイヤーがいる場合、攻撃を行う
+            if (playersInRange.Count > 0)
+            {
+                Attack();
+            }
         }
    }
 
@@ -80,7 +87,56 @@ public class EnemyController : MonoBehaviour
         if (!isAbsorbing)
         {
             MoveTowardsPlayer();
-            attackTimer += Time.deltaTime; // 攻撃タイマーを更新
+            // 攻撃範囲内にプレイヤーがいる場合、攻撃を行う
+            if (playersInRange.Count > 0)
+            {
+                Attack();
+            }
+        }
+    }
+
+    // 攻撃処理
+    void Attack()
+    {
+        if (attackTimer >= attackInterval && !isAttacking)
+        {
+            isAttacking = true;
+            // 攻撃範囲内のすべてのプレイヤーにダメージを与える
+            foreach (PlayerController player in playersInRange)
+            {
+                if (player != null)
+                {
+                    player.TakeDamage(status.absorbPower);
+                }
+            }
+            attackTimer = 0f; // タイマーをリセット
+            isAttacking = false;
+        }
+    }
+
+    // 攻撃範囲にプレイヤーが入った時の処理
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                playersInRange.Add(player); // 攻撃範囲内のプレイヤーリストに追加
+            }
+        }
+    }
+
+    // 攻撃範囲からプレイヤーが出た時の処理
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                playersInRange.Remove(player); // 攻撃範囲外に出たプレイヤーをリストから削除
+            }
         }
     }
 
@@ -183,14 +239,18 @@ public class EnemyController : MonoBehaviour
     // プレイヤーとの衝突判定
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("OnCollisionEnter2D");
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("OnCollisionEnter2D:Player");
             // プレイヤーにダメージを与える
             if (attackTimer >= attackInterval)
             {
+                Debug.Log("OnCollisionEnter2D:Player:attackTimer >= attackInterval");
                 PlayerController player = collision.gameObject.GetComponent<PlayerController>();
                 if (player != null)
                 {
+                    Debug.Log("OnCollisionEnter2D:Player:attackTimer >= attackInterval:player != null");
                     player.TakeDamage(status.absorbPower);
                 }
                 attackTimer = 0f;

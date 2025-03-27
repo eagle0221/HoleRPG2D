@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: "\u65752"
   enemyStatus:
-    maxHp: 1
-    hp: 1
-    absorbPower: 1
+    maxHp: 5
+    hp: 5
+    absorbPower: 3
     strength: 0
     speed: 1
     size: 1
     attackSpeed: 1
+    minScale: 0
+    destroyDistance: 0
   dropItems: []
   exp: 10
   money: 1
