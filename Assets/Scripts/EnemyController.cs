@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using TMPro;
 
 public class EnemyController : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class EnemyController : MonoBehaviour
     public ItemDropUIController itemDropUIController; // ItemDropUIControllerへの参照を追加
     private List<PlayerController> playersInRange = new List<PlayerController>(); // 攻撃範囲内のプレイヤーを管理するリスト
     private bool isAttacking = false; // 攻撃中かどうか
+    public Slider hpBar;
+    public TextMeshProUGUI enemyNameText;
 
     void Start()
     {
@@ -28,6 +32,9 @@ public class EnemyController : MonoBehaviour
         {
             status = new EnemyStatus(enemyData.enemyStatus.maxHp, enemyData.enemyStatus.maxHp, enemyData.enemyStatus.absorbPower, enemyData.enemyStatus.strength, enemyData.enemyStatus.speed, enemyData.enemyStatus.size, enemyData.enemyStatus.attackSpeed, enemyData.enemyStatus.minScale, enemyData.enemyStatus.destroyDistance, enemyData.enemyStatus.isBoss);
             UpdateEnemyStatus(); // 初期サイズを適用
+            enemyNameText.text = enemyData.enemyName;
+            hpBar.maxValue = status.maxHp;
+            hpBar.value = status.maxHp;
         }
         else
         {
@@ -46,7 +53,7 @@ public class EnemyController : MonoBehaviour
     // 敵のステータスを更新するメソッド
     public void UpdateEnemyStatus()
     {
-        // 敵のサイズを更新
+        // 敵のステータスを更新
         transform.localScale = Vector3.one * status.size;
     }
 
@@ -84,6 +91,11 @@ public class EnemyController : MonoBehaviour
         {
             Move();
         }
+    }
+
+    public void UpdateHpBar(float currentHp)
+    {
+        hpBar.value = currentHp;
     }
 
     // 攻撃処理
@@ -191,6 +203,7 @@ public class EnemyController : MonoBehaviour
         float actualDamage = Mathf.Max(0, damage - status.strength);
         UpdateEnemyStatus(); // サイズ変更を反映
         status.hp -= actualDamage;
+        UpdateHpBar(status.hp);
         // ダメージテキストを表示
         ShowDamageText(actualDamage);
         // HPが0以下になったら倒れる
