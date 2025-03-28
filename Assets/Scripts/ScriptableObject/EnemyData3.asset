@@ -26,4 +26,4 @@ MonoBehaviour:
   dropItems: []
   exp: 10
   money: 1
-  enemySprite: {fileID: 0}
+  enemySprite: {fileID: -1480462449089319928, guid: 4eeda2e65966c044aa86455c162cbac7, type: 3}

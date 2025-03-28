@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rb;
     public EnemyData enemyData; // 敵のデータ
     public GameObject equipmentObjectPrefab; // 装備アイテムのプレハブ
-    private EnemyStatus status; // 敵のステータス
+    public EnemyStatus status; // 敵のステータス
     private float attackTimer = 0f; // 攻撃タイマー
     private float attackInterval = 0f; // 攻撃間隔
     public GameObject damageTextPrefab; // ダメージテキストのプレハブを追加
@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
         // EnemyDataからステータスを初期化
         if (enemyData != null)
         {
-            status = new EnemyStatus(enemyData.enemyStatus.maxHp, enemyData.enemyStatus.maxHp, enemyData.enemyStatus.absorbPower, enemyData.enemyStatus.strength, enemyData.enemyStatus.speed, enemyData.enemyStatus.size, enemyData.enemyStatus.attackSpeed, enemyData.enemyStatus.minScale, enemyData.enemyStatus.destroyDistance);
+            status = new EnemyStatus(enemyData.enemyStatus.maxHp, enemyData.enemyStatus.maxHp, enemyData.enemyStatus.absorbPower, enemyData.enemyStatus.strength, enemyData.enemyStatus.speed, enemyData.enemyStatus.size, enemyData.enemyStatus.attackSpeed, enemyData.enemyStatus.minScale, enemyData.enemyStatus.destroyDistance, enemyData.enemyStatus.isBoss);
             UpdateEnemyStatus(); // 初期サイズを適用
         }
         else
@@ -44,17 +44,15 @@ public class EnemyController : MonoBehaviour
     }
 
     // 敵のステータスを更新するメソッド
-    void UpdateEnemyStatus()
+    public void UpdateEnemyStatus()
     {
         // 敵のサイズを更新
         transform.localScale = Vector3.one * status.size;
-        // 敵の移動速度を更新
-        //moveSpeed = status.speed; //moveSpeedは使わないので削除
     }
 
     void Update()
     {
-         if (isAbsorbing)
+        if (isAbsorbing)
         {
             // プレイヤーに向かって移動
             Vector3 direction = (player.position - transform.position).normalized;
@@ -71,7 +69,6 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            MoveTowardsPlayer();
             attackTimer += Time.deltaTime;
             // 攻撃範囲内にプレイヤーがいる場合、攻撃を行う
             if (playersInRange.Count > 0)
@@ -79,19 +76,13 @@ public class EnemyController : MonoBehaviour
                 Attack();
             }
         }
-   }
+    }
 
     void FixedUpdate()
     {
-        // プレイヤーに向かって移動
-        if (!isAbsorbing)
+        if (!isAbsorbing && !enemyData.isBoss)
         {
-            MoveTowardsPlayer();
-            // 攻撃範囲内にプレイヤーがいる場合、攻撃を行う
-            if (playersInRange.Count > 0)
-            {
-                Attack();
-            }
+            Move();
         }
     }
 
@@ -140,7 +131,8 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void MoveTowardsPlayer()
+    // 移動処理
+    void Move()
     {
         if (player != null)
         {
@@ -180,7 +172,6 @@ public class EnemyController : MonoBehaviour
                     {
                         Debug.Log("transform.positionが設定されていません!");
                     }
-                    Debug.Log("DropItem called with item: " + (dropItemData.item != null ? dropItemData.item.itemName : "null") + ", position: " + transform.position);
                     itemDropUIController.ShowItemDrop(dropItemData.item, transform.position);
                 }
             }
@@ -257,7 +248,7 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
-    
+
     // 吸収を開始するメソッド
     public void StartAbsorbing()
     {
@@ -283,5 +274,9 @@ public class EnemyController : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = enemyData.enemySprite;
         gameObject.tag = "Enemy";
         isAbsorbing = false; // 初期化時に吸収中でないことを確認
+        if (enemyData.isBoss)
+        {
+            gameObject.tag = "Boss";
+        }
     }
 }
