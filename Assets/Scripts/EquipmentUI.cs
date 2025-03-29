@@ -6,26 +6,16 @@ using TMPro;
 public class EquipmentUI : MonoBehaviour
 {
     public PlayerController player;
-    public GameObject equipmentPanel;
     public Image[] equipmentSlots;
     public Button[] equipmentButtons; // Releaseボタンの配列を追加
     public GameObject itemButtonPrefab;
     public Transform itemListContent;
-    public Button equipButton;
-    public Button closeButton;
-    public Button openEquipmentButton;
-    public GameObject openEquipment;
     private EquipmentItem selectedItem;
-    private EquipmentItem[] equipmentItems;
     public TextMeshProUGUI[] equipmentsName = new TextMeshProUGUI[2]; // 装備スロット（2つ）
     public TextMeshProUGUI[] equipmentsText = new TextMeshProUGUI[2]; // 装備スロット（2つ）
 
     void Start()
     {
-        openEquipmentButton.onClick.AddListener(OpenEquipmentPanel);
-        closeButton.onClick.AddListener(CloseEquipmentPanel);
-        equipButton.onClick.AddListener(EquipItem);
-
         // Releaseボタンにリスナーを追加
         for (int i = 0; i < equipmentButtons.Length; i++)
         {
@@ -34,20 +24,7 @@ public class EquipmentUI : MonoBehaviour
         }
         // インベントリの変更イベントを購読
         player.inventory.OnInventoryChanged += UpdateItemList;
-    }
-
-    public void OpenEquipmentPanel()
-    {
-        openEquipment.SetActive(false);
-        equipmentPanel.SetActive(true);
         UpdateItemList();
-        UpdateEquipmentSlots();
-    }
-
-    public void CloseEquipmentPanel()
-    {
-        equipmentPanel.SetActive(false);
-        openEquipment.SetActive(true);
     }
 
     public void UpdateItemList()
@@ -97,6 +74,7 @@ public class EquipmentUI : MonoBehaviour
     public void SelectItem(EquipmentItem item)
     {
         selectedItem = item;
+        EquipItem();
     }
 
     public void OnReleaseEquipmentButton(int slotIndex)

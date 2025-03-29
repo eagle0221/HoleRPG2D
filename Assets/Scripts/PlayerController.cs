@@ -8,6 +8,10 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public PlayerStatus status = new PlayerStatus(); // ステータス管理クラスのインスタンス
+    public GameObject statusPanel; // ステータス画面
+    public Button openStatusButton; // ステータス画面を開くボタン
+    public Button closeStatusButton; // ステータス画面を閉じるボタン
+    private bool isStatusPanelOpen = false; // ステータス画面が開いているかどうか
     public Slider expSlider;
     public TextMeshProUGUI levelText; // レベル表示用テキスト
     public TextMeshProUGUI statusPointText; // ステータスポイント表示用テキスト
@@ -16,7 +20,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 touchStartPos;
     private Vector2 touchEndPos;
     public int REBIRTH_LEVEL = 10;
-    public GameObject statusPanel; // ステータス割り振りパネル
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI absorbPowerText;
     public TextMeshProUGUI strengthText;
@@ -28,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public EquipmentItem[] equipments = new EquipmentItem[2]; // 装備スロット（2つ）
     public TextMeshProUGUI[] equipmentsName = new TextMeshProUGUI[2]; // 装備スロット（2つ）
     public TextMeshProUGUI[] equipmentsText = new TextMeshProUGUI[2]; // 装備スロット（2つ）
+    private bool isEquipPanelOpen = false; // ステータス画面が開いているかどうか
     public Inventory inventory; // インベントリへの参照を追加
     public int money = 0; // 所持金
     public float invincibilityTime = 1f; // 無敵時間
@@ -38,6 +42,9 @@ public class PlayerController : MonoBehaviour
     private EnemyController targetEnemy; // 攻撃対象の敵
     public Canvas canvas; // Canvasへの参照を追加
     public Button rebirthButton; // 転生ボタンへの参照を追加
+    public GameObject equipPanel; // 装備画面
+    public Button openEquipButton; // 装備画面を開くボタン
+    public Button closeEquipButton; // 装備画面を閉じるボタン
 
     void Start()
     {
@@ -57,6 +64,14 @@ public class PlayerController : MonoBehaviour
         UpdatePlayerStatus(); // 初期サイズを適用
         attackSpeedSlider.maxValue = 1f; // 最大値を1に設定
         attackSpeedSlider.value = 0f; // 初期値を0に設定
+        // ステータス画面を開くボタンの処理を追加
+        openStatusButton.onClick.AddListener(OpenStatusPanel);
+        // ステータス画面を閉じるボタンの処理を追加
+        closeStatusButton.onClick.AddListener(CloseStatusPanel);
+        // 装備画面を開くボタンの処理を追加
+        openEquipButton.onClick.AddListener(OpenEquipPanel);
+        // 装備画面を閉じるボタンの処理を追加
+        closeEquipButton.onClick.AddListener(CloseEquipPanel);
     }
 
     void Update()
@@ -90,6 +105,15 @@ public class PlayerController : MonoBehaviour
                 isInvincible = false;
                 invincibilityTimer = 0f;
             }
+        }
+        // ステータス画面が開いている間、ゲームを一時停止
+        if (isStatusPanelOpen || isEquipPanelOpen)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
         }
     }
 
@@ -281,12 +305,14 @@ public class PlayerController : MonoBehaviour
     {
         statusPanel.SetActive(true);
         UpdateStatusText(); // ステータス割り振りパネルを開いたときにステータスを表示するために追加
+        isStatusPanelOpen = true; // ステータス画面が開いていることを記録
     }
 
     // ステータス割り振りパネルを閉じる
     public void CloseStatusPanel()
     {
         statusPanel.SetActive(false);
+        isStatusPanelOpen = false; // ステータス画面が閉じていることを記録
     }
 
     // ステータス割り振り処理
@@ -353,12 +379,26 @@ public class PlayerController : MonoBehaviour
 
     public void UpdateMoneyUI()
     {
-        moneyText.text = "Money: " + money.ToString();
+        moneyText.text = money.ToString("N0");
     }
 
     void UpdateExpSlider()
     {
         expSlider.value = status.currentExp;
+    }
+
+    // 装備画面を開く
+    public void OpenEquipPanel()
+    {
+        equipPanel.SetActive(true);
+        isEquipPanelOpen = true; // 装備画面が開いていることを記録
+    }
+
+    // 装備画面を閉じる
+    public void CloseEquipPanel()
+    {
+        equipPanel.SetActive(false);
+        isEquipPanelOpen = false; // 装備画面が閉じていることを記録
     }
 
     // 装備処理
