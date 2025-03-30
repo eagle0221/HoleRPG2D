@@ -29,7 +29,6 @@ public class AbsorbableObject : MonoBehaviour
         if (isAbsorbing)
         {
             // プレイヤーに向かって移動
-            Debug.Log("player.position" + player.position);
             Vector3 direction = (player.position - transform.position).normalized;
             transform.position += direction * objectData.moveSpeed * Time.deltaTime;
 
