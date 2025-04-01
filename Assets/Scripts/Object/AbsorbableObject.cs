@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class AbsorbableObject : MonoBehaviour
 {
     public List<AbsorbableObjectData> objectDataList; // オブジェクトのデータ
-    private AbsorbableObjectData objectData; // オブジェクトのデータ
+    public AbsorbableObjectData objectData; // オブジェクトのデータ
     private Transform player; // プレイヤーのTransform
     private bool isAbsorbing = false; // 吸収中かどうか
 
@@ -16,7 +16,7 @@ public class AbsorbableObject : MonoBehaviour
         {
             Debug.Log("Player not found");
         }
-
+        
         // objectDataから情報を初期化
         int rnd = Random.Range(0, objectDataList.Count);
         objectData = objectDataList[rnd];  // 登録したオブジェクトからランダム

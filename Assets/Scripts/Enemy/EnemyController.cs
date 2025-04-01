@@ -91,6 +91,15 @@ public class EnemyController : MonoBehaviour
         {
             Move();
         }
+        KeepEnemyInBounds(GameManager.Instance.CurrentGameField); // 敵を範囲内に保つ処理を追加
+    }
+
+    // 敵をフィールド範囲内に保つ
+    void KeepEnemyInBounds(GameField gameField)
+    {
+        if(gameField == null) return;
+        Vector2 clampedPosition = gameField.ClampPosition(rb.position);
+        rb.position = clampedPosition;
     }
 
     public void UpdateHpBar(float currentHp)

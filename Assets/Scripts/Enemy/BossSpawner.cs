@@ -5,7 +5,7 @@ public class BossSpawner : MonoBehaviour
     public GameObject bossPrefab; // ボスのプレハブ
     public BossData bossData; // ボスのデータ
 
-    void Start()
+    void OnEnable()
     {
         SpawnBoss();
     }

@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public Button openEquipButton; // 装備画面を開くボタン
     public Button closeEquipButton; // 装備画面を閉じるボタン
 
-    void Start()
+    void Awake()
     {
         // Canvasを取得
         canvas = FindAnyObjectByType<Canvas>();
@@ -120,7 +120,8 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         MovePlayer();
-        KeepPlayerInBounds(); // プレイヤーを範囲内に保つ処理を追加
+        //KeepPlayerInBounds(); // プレイヤーを範囲内に保つ処理を追加
+        KeepPlayerInBounds(GameManager.Instance.CurrentGameField); // プレイヤーを範囲内に保つ処理を追加
     }
 
     void HandleInput()
@@ -153,14 +154,26 @@ public class PlayerController : MonoBehaviour
     }
 
     // プレイヤーをフィールド範囲内に保つ
-    void KeepPlayerInBounds()
+    void KeepPlayerInBounds(GameField gameField)
     {
-        Vector2 clampedPosition = GameField.Instance.ClampPosition(rb.position);
+        if(gameField == null) return;
+        Vector2 clampedPosition = gameField.ClampPosition(rb.position);
         rb.position = clampedPosition;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+/*        if (other.CompareTag("TransitionObject"))
+        {
+            // 吸収可能なオブジェクトかどうか確認
+            TransitionObject transitionObject = other.GetComponent<TransitionObject>();
+            if (transitionObject != null)
+            {
+                // 吸収開始
+                transitionObject.StartAbsorbing();
+            }
+        }*/
+        
         if (other.CompareTag("AbsorbableObject"))
         {
             // 吸収可能なオブジェクトかどうか確認
@@ -271,8 +284,8 @@ public class PlayerController : MonoBehaviour
     {
         status.level++;
         status.currentExp -= status.maxExp;
-        status.maxExp *= 1.2f; // 次のレベルに必要な経験値を増加
-        status.statusPoint += 3; // レベルアップ時にステータスポイントを付与
+        status.maxExp *= 1.5f; // 次のレベルに必要な経験値を増加
+        status.statusPoint += 5; // レベルアップ時にステータスポイントを付与
         UpdateUI();
         UpdateRebirthButtonInteractable(); // レベルアップ時にボタンの状態を更新
     }

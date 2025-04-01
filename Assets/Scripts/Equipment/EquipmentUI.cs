@@ -24,8 +24,14 @@ public class EquipmentUI : MonoBehaviour
         }
         // インベントリの変更イベントを購読
         player.inventory.OnInventoryChanged += UpdateItemList;
-        UpdateItemList();
     }
+
+    void OnEnable()
+    {
+        UpdateItemList();
+        UpdateEquipmentSlots();
+    }
+    
 
     public void UpdateItemList()
     {

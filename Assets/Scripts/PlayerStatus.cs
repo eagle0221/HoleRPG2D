@@ -3,6 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerStatus
 {
+    public Vector3 position;
     public float maxHp = 100f;
     public float hp = 100f;
     public float absorbPower = 3f; // 吸収力（攻撃力）
@@ -29,7 +30,7 @@ public class PlayerStatus
         absorbPower = 3f;
         strength = 0f;
         speed = 5f;
-        size = 5f; // 初期値を1に設定
+        size = 1f; // 初期値を1に設定
         attraction = 1f;
         attackSpeed = 1f;
     }

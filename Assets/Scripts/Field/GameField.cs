@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class GameField : MonoBehaviour
 {
-    public static GameField Instance; // シングルトンパターンで簡単にアクセスできるようにする
+    //public static GameField Instance; // シングルトンパターンで簡単にアクセスできるようにする
 
     [Header("フィールド境界")]
     public float minX = -13f;
@@ -23,6 +23,7 @@ public class GameField : MonoBehaviour
     public float objectSpawnInterval = 2f; // オブジェクトの生成間隔
     //private float objectSpawnTimer = 0f; // オブジェクトの生成タイマー
 
+/*
     private void Awake()
     {
         // シングルトンパターン
@@ -34,6 +35,13 @@ public class GameField : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+*/
+
+    private void OnEnable()
+    {
+        // Register this GameField with the GameManager
+        GameManager.Instance.SetCurrentGameField(this);
     }
 
     private void Update()
