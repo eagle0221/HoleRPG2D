@@ -95,6 +95,12 @@ public class SaveManager : MonoBehaviour
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
             spawnedObjects = saveData.objects;
 
+            // 実績情報ロード
+            GameManager.Instance.trackRecord = saveData.trackRecord;
+
+            // リソース情報ロード
+            GameManager.Instance.resourceInfo = saveData.resourceInfo;            
+
             // プレイヤー、インベントリ、装備のデータをロード
             player.status = saveData.playerStatus;
             //player.inventory = saveData.inventory; // この行を削除
@@ -111,7 +117,7 @@ public class SaveManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("EquipmentItem not found: " + itemData.itemName);
+                    Debug.LogError("Inventory not found: " + itemData.itemName);
                 }
             }
 

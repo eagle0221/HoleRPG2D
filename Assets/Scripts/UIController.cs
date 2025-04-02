@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -64,6 +65,7 @@ public class UIController : MonoBehaviour
     private void OnYesButtonClicked()
     {
         LoadAnotherWorld();
+        CompareTagEnemyDelete();
         HideTransitionPanel();
         playerTransform.position = new Vector3(0, -9, -1);
         isWindowOpen = false; // ステータス画面が開いているかどうか
@@ -90,6 +92,14 @@ public class UIController : MonoBehaviour
         if (player != null)
         {
             player.transform.position = returnPosition;
+        }
+    }
+
+    public void CompareTagEnemyDelete()
+    {
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            Destroy(obj);
         }
     }
 }

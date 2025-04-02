@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 public class GameField : MonoBehaviour
 {
-    //public static GameField Instance; // シングルトンパターンで簡単にアクセスできるようにする
+    [Header("フィールド名")]
+    [SerializeField] private string strStageName;
+    public string stageName { get { return strStageName; } }
 
     [Header("フィールド境界")]
     public float minX = -13f;
@@ -22,21 +24,6 @@ public class GameField : MonoBehaviour
     public List<AbsorbableObjectData> objectDatas; // オブジェクトのデータのリスト
     public float objectSpawnInterval = 2f; // オブジェクトの生成間隔
     //private float objectSpawnTimer = 0f; // オブジェクトの生成タイマー
-
-/*
-    private void Awake()
-    {
-        // シングルトンパターン
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-*/
 
     private void OnEnable()
     {
