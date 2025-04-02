@@ -4,8 +4,10 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
-    public List<ObjectData> objects;
-    public PlayerStatus player;
-    public InventoryData inventoryData;
-    public EquipmentData[] equipments; // EquipmentDataの配列に変更
+    public List<ObjectData> objects;    // 配置オブジェクトのリスト
+    public PlayerStatus playerStatus;   // プレイヤー情報
+    public InventoryData inventoryData; // 所持アイテム
+    public EquipmentData[] equipments;  // 装備アイテム
+    public TrackRecord trackRecord;     // 実績情報
+    public ResourceInfo resourceInfo;   // リソース情報 
 }

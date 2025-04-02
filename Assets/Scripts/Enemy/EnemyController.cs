@@ -287,6 +287,7 @@ public class EnemyController : MonoBehaviour
         {
             playerController.AddExp(enemyData.exp);
         }
+        GameManager.Instance.trackRecord.EnemyAbsorbCount++;
         Destroy(gameObject);
     }
 

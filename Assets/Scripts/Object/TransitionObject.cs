@@ -4,7 +4,7 @@ public class TransitionObject : MonoBehaviour
 {
     public float respawnTime = 10f; // 再生成までの時間
     private bool isAbsorbed = false;
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !isAbsorbed)

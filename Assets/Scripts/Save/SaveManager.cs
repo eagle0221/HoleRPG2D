@@ -7,32 +7,24 @@ using JetBrains.Annotations;
 public class SaveManager : MonoBehaviour
 {
     public PlayerController player;
-    public GameObject objectToSpawn; // 配置するオブジェクトのプレハブ
-    public int numberOfObjects = 10; // 配置するオブジェクトの数
-    public Vector2 spawnAreaMin = new Vector2(-5, -5); // 配置範囲の最小座標
-    public Vector2 spawnAreaMax = new Vector2(5, 5); // 配置範囲の最大座標
     public List<ObjectData> spawnedObjects = new List<ObjectData>();
     private string saveFilePath;
     public Button saveButton;
-    //public float spawnInterval = 2f;
-    //private float timer = 0f;
 
     void Start()
     {
         saveFilePath = Path.Combine(Application.persistentDataPath, "saveData.json");
-        DataLoad();
+        Load();
         if (spawnedObjects.Count == 0)
         {
             //SpawnObjects();
         }
-        saveButton.onClick.AddListener(DataSave);
+        saveButton.onClick.AddListener(Save);
     }
 
-    void DataSave()
+    void Save()
     {
         // オブジェクトの配置
-        //ObjectData objectData = new();
-        //spawnedObjects.Add(objectData);
         spawnedObjects.Clear();
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("AbsorbableObject"))
         {
@@ -71,10 +63,7 @@ public class SaveManager : MonoBehaviour
             }
         }
 
-
-
-
-        PlayerStatus playerStatus = player.status;
+        PlayerStatus lPlayerStatus = player.status;
 
         // Inventoryの情報をInventoryDataに変換
         InventoryData inventoryData = new InventoryData(inventory);
@@ -83,9 +72,11 @@ public class SaveManager : MonoBehaviour
         SaveData saveData = new SaveData
         {
             objects = spawnedObjects,
-            player = playerStatus,
-            inventoryData = inventoryData, // inventoryDataを保存
-            equipments = equipmentDatas
+            playerStatus = lPlayerStatus,
+            inventoryData = inventoryData,
+            equipments = equipmentDatas,
+            trackRecord = GameManager.Instance.trackRecord,
+            resourceInfo = GameManager.Instance.resourceInfo
         };
 
         // JSON形式に変換して保存
@@ -96,7 +87,7 @@ public class SaveManager : MonoBehaviour
         Debug.Log(json);
     }
 
-    void DataLoad()
+    void Load()
     {
         if (File.Exists(saveFilePath))
         {
@@ -104,19 +95,8 @@ public class SaveManager : MonoBehaviour
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
             spawnedObjects = saveData.objects;
 
-            foreach (ObjectData data in spawnedObjects)
-            {
-                if (!data.isAbsorbed)
-                {
-                    GameObject obj = Instantiate(objectToSpawn, data.position, Quaternion.identity);
-                    AbsorbableObject absorbableObject = obj.GetComponent<AbsorbableObject>();
-                    absorbableObject.objectData = Resources.Load<AbsorbableObjectData>("Absorbable Object Data/" + data.objectName);
-                    absorbableObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/" + data.objectSpriteName);
-                }
-            }
-
             // プレイヤー、インベントリ、装備のデータをロード
-            player.status = saveData.player;
+            player.status = saveData.playerStatus;
             //player.inventory = saveData.inventory; // この行を削除
 
             // Inventoryをロード

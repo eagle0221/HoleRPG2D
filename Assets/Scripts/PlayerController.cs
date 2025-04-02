@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 1f;
     public PlayerStatus status = new PlayerStatus(); // ステータス管理クラスのインスタンス
     public GameObject statusPanel; // ステータス画面
     public Button openStatusButton; // ステータス画面を開くボタン
@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public GameObject equipPanel; // 装備画面
     public Button openEquipButton; // 装備画面を開くボタン
     public Button closeEquipButton; // 装備画面を閉じるボタン
+    public GameObject loseWindow; // 負画面
 
     void Awake()
     {
@@ -285,7 +286,7 @@ public class PlayerController : MonoBehaviour
         status.level++;
         status.currentExp -= status.maxExp;
         status.maxExp *= 1.5f; // 次のレベルに必要な経験値を増加
-        status.statusPoint += 5; // レベルアップ時にステータスポイントを付与
+        status.statusPoint += 3; // レベルアップ時にステータスポイントを付与
         UpdateUI();
         UpdateRebirthButtonInteractable(); // レベルアップ時にボタンの状態を更新
     }
@@ -340,10 +341,10 @@ public class PlayerController : MonoBehaviour
                     status.hp = status.maxHp;
                     break;
                 case "AbsorbPower":
-                    status.absorbPower += 0.1f;
+                    status.absorbPower += 1f;
                     break;
                 case "Strength":
-                    status.strength += 0.1f;
+                    status.strength += 1f;
                     break;
                 case "Speed":
                     status.speed += 0.1f;
@@ -522,10 +523,19 @@ public class PlayerController : MonoBehaviour
             {
                 // プレイヤーが倒れた時の処理
                 Debug.Log("プレイヤーが倒れました");
+                GameManager.Instance.trackRecord.PlayerDieCount++;
                 // ここにゲームオーバー処理などを追加
+                loseWindow.SetActive(true);
             }
             // 無敵状態にする
             isInvincible = true;
         }
+    }
+
+    // HPを回復させる関数を追加
+    public void RestoreHP()
+    {
+        status.hp = status.maxHp; // HPを最大値まで回復
+        UpdateStatusText(); // UIを更新
     }
 }

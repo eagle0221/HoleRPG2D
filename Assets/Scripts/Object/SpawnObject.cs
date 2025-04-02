@@ -6,6 +6,7 @@ public class SpawnObject : MonoBehaviour
 {
     public GameObject objectToSpawn; // 配置するオブジェクトのプレハブ
     [SerializeField] private SaveManager saveManager;
+    [SerializeField] private Transform spawnTransform;
     public List<Vector3> positions;
     public List<AbsorbableObjectData> objectDataLists; // オブジェクトのデータ
 
@@ -20,7 +21,7 @@ public class SpawnObject : MonoBehaviour
             {
                 if (!data.isAbsorbed)
                 {
-                    GameObject obj = Instantiate(objectToSpawn, data.position, Quaternion.identity);
+                    GameObject obj = Instantiate(objectToSpawn, data.position, Quaternion.identity, spawnTransform);
                     AbsorbableObject absorbableObject = obj.GetComponent<AbsorbableObject>();
                     absorbableObject.objectData = Resources.Load<AbsorbableObjectData>("Absorbable Object Data/" + data.objectName);
                     absorbableObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/" + data.objectSpriteName);
@@ -35,7 +36,7 @@ public class SpawnObject : MonoBehaviour
                 // objectDataから情報を初期化
                 int rnd = Random.Range(0, objectDataLists.Count);
 
-                GameObject obj = Instantiate(objectToSpawn, position, Quaternion.identity);
+                GameObject obj = Instantiate(objectToSpawn, position, Quaternion.identity, spawnTransform);
                 AbsorbableObject absorbableObject = obj.GetComponent<AbsorbableObject>();
                 absorbableObject.GetComponent<SpriteRenderer>().sprite = objectDataLists[rnd].objectSprite;
                 absorbableObject.objectData = objectDataLists[rnd];
@@ -56,7 +57,6 @@ public class SpawnObject : MonoBehaviour
             Debug.Log("positionInitialize End");
         }
     }
-
     void positionInitialize()
     {
         float x = -12.0f;

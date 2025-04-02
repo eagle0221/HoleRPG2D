@@ -3,9 +3,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
     public GameField CurrentGameField { get; private set; }
-
+    public TrackRecord trackRecord = new();
+    public ResourceInfo resourceInfo = new();
+    
     private void Awake()
     {
         // Singleton pattern implementation

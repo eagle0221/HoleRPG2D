@@ -12,12 +12,10 @@ GameObject:
   - component: {fileID: 6597000375005977963}
   - component: {fileID: 3144419532234757881}
   - component: {fileID: 3034536876290455003}
-  - component: {fileID: 3119818199767980369}
-  - component: {fileID: 4904923704486923307}
   - component: {fileID: 5798116296479984195}
   m_Layer: 0
   m_Name: TransitionObject
-  m_TagString: AbsorbableObject
+  m_TagString: TransitionObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,32 +153,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.6687454}
   m_Radius: 0.32485235
---- !u!114 &3119818199767980369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 758599702765035231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ee4a49fa6687564ebdad0dae1ea27af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4904923704486923307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 758599702765035231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38b965759b0565048b47a38bfec68d0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectDataList:
-  - {fileID: 11400000, guid: 6aa981cdfd4385c4187931a97c13f45d, type: 2}
 --- !u!114 &5798116296479984195
 MonoBehaviour:
   m_ObjectHideFlags: 0

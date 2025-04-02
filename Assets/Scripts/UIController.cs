@@ -5,6 +5,7 @@ public class UIController : MonoBehaviour
 {
     public static UIController Instance;
     public GameObject transitionPanel;
+    [SerializeField] private Transform playerTransform;
     public Button yesButton;
     public Button noButton;
     public GameObject mainField; // MainFieldのGameObject
@@ -64,6 +65,7 @@ public class UIController : MonoBehaviour
     {
         LoadAnotherWorld();
         HideTransitionPanel();
+        playerTransform.position = new Vector3(0, -9, -1);
         isWindowOpen = false; // ステータス画面が開いているかどうか
     }
 

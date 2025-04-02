@@ -8,7 +8,7 @@ public class PlayerStatus
     public float hp = 100f;
     public float absorbPower = 3f; // 吸収力（攻撃力）
     public float strength = 0f; // 強度（防御力）
-    public float speed = 5f; // スピード
+    public float speed = 1f; // スピード
     public float size = 1f; // サイズ
     public float attraction = 1f; // 引力
     public float attackSpeed = 1f; // 攻撃スピード
@@ -29,9 +29,10 @@ public class PlayerStatus
         hp = maxHp;
         absorbPower = 3f;
         strength = 0f;
-        speed = 5f;
+        speed = 1f;
         size = 1f; // 初期値を1に設定
         attraction = 1f;
         attackSpeed = 1f;
+        GameManager.Instance.trackRecord.RebirthCount++;
     }
 }

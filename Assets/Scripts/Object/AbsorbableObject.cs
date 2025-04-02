@@ -58,6 +58,7 @@ public class AbsorbableObject : MonoBehaviour
         {
             playerController.AddExp(objectData.exp);
         }
+        GameManager.Instance.trackRecord.ObjectAbsorbCount++;
         Destroy(gameObject);
     }
 }

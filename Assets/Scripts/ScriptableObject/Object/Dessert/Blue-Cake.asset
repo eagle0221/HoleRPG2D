@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8756ce56a4bcc18459312060c1852926, type: 3}
   m_Name: Blue-Cake
   m_EditorClassIdentifier: 
-  objectName: "\u8981\u585E"
+  objectName: "\u9752\u3044\u30B1\u30FC\u30AD"
   objectSprite: {fileID: 21300000, guid: d3c1db53c52214b6b95bdc1d77d8dd82, type: 3}
-  moveSpeed: 5
+  moveSpeed: 0
   shrinkSpeed: 2
   minScale: 0.1
   destroyDistance: 0.5
-  exp: 10
+  exp: 1
