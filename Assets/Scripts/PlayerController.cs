@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 touchStartPos;
     private Vector2 touchEndPos;
     public int REBIRTH_LEVEL = 10;
+    public Slider sliHP;
+    public TextMeshProUGUI txtHP;
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI absorbPowerText;
     public TextMeshProUGUI strengthText;
@@ -287,6 +289,7 @@ public class PlayerController : MonoBehaviour
         status.currentExp -= status.maxExp;
         status.maxExp *= 1.5f; // 次のレベルに必要な経験値を増加
         status.statusPoint += 3; // レベルアップ時にステータスポイントを付与
+        status.hp = status.maxHp; // レベルアップ時HPを全回復
         UpdateUI();
         UpdateRebirthButtonInteractable(); // レベルアップ時にボタンの状態を更新
     }
@@ -385,6 +388,9 @@ public class PlayerController : MonoBehaviour
     {
         expSlider.maxValue = status.maxExp;
         expSlider.value = status.currentExp;
+        sliHP.maxValue = status.maxHp;
+        sliHP.value = status.hp;
+        txtHP.text = status.hp.ToString() + " / " + status.maxHp.ToString();
         levelText.text = "Lv: " + status.level.ToString();
         statusPointText.text = "SP: " + status.statusPoint.ToString(); //ステータスポイントの表示を更新
         UpdateMoneyUI();
@@ -519,6 +525,7 @@ public class PlayerController : MonoBehaviour
             float actualDamage = Mathf.Max(0, damage - status.strength);
             status.hp -= actualDamage;
             UpdateStatusText(); // UIを更新
+            UpdateUI(); // UIを更新
             if (status.hp <= 0)
             {
                 // プレイヤーが倒れた時の処理

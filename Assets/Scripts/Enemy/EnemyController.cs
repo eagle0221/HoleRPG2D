@@ -239,12 +239,6 @@ public class EnemyController : MonoBehaviour
     void Die()
     {
         DropItem();
-        // 経験値加算処理を追加
-        PlayerController player = FindAnyObjectByType<PlayerController>();
-        if (player != null)
-        {
-            player.AddExp(enemyData.exp); // 敵のデータから経験値を取得して加算
-        }
         // 倒れたら吸収演出を開始
         StartAbsorbing();
     }
