@@ -10,12 +10,12 @@ public class SpawnObject : MonoBehaviour
     public List<Vector3> positions;
     public List<AbsorbableObjectData> objectDataLists; // オブジェクトのデータ
 
-    void Start()
+    public void Start()
     {
         string saveFilePath = Path.Combine(Application.persistentDataPath, "saveData.json");
         Debug.Log(saveManager.spawnedObjects.Count > 0);
         Debug.Log(File.Exists(saveFilePath));
-        if(saveManager.spawnedObjects.Count > 0 || File.Exists(saveFilePath))
+        if((saveManager.spawnedObjects.Count > 0 || File.Exists(saveFilePath)) && !PlayerLose.deathFlg)
         {
             foreach (ObjectData data in saveManager.spawnedObjects)
             {
@@ -57,7 +57,7 @@ public class SpawnObject : MonoBehaviour
             Debug.Log("positionInitialize End");
         }
     }
-    void positionInitialize()
+    public void positionInitialize()
     {
         float x = -12.0f;
         float y = -9.0f;

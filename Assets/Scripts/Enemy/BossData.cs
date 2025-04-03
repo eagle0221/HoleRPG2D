@@ -8,7 +8,7 @@ public class BossData : ScriptableObject
     public Sprite bossSprite; // ボスのスプライト
     public EnemyStatus bossStatus; // ボスのステータス
     public List<DropItemData> dropItems; // ドロップアイテム
-    public int money; // ドロップするお金
+    public ulong money; // ドロップするお金
     public int exp; // ドロップする経験値
     public Vector3 position; // ボスの配置位置
     public float sizeMultiplier = 1.5f; // ボスのサイズ倍率

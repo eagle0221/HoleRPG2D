@@ -55,11 +55,10 @@ public class ShopUI : MonoBehaviour
 
     public void BuyItem(ShopItemData shopItem)
     {
-        if (player.money >= shopItem.price)
+        if (GameManager.Instance.resourceInfo.Money >= shopItem.price)
         {
-            player.money -= shopItem.price;
+            GameManager.Instance.resourceInfo.Money -= shopItem.price;
             player.inventory.AddItem(shopItem.item);
-            player.UpdateMoneyUI();
         }
         else
         {

@@ -4,8 +4,8 @@ using UnityEngine;
 public class PlayerStatus
 {
     public Vector3 position;
-    public float maxHp = 100f;
-    public float hp = 100f;
+    public float maxHp = 50f;
+    public float hp = 50f;
     public float absorbPower = 3f; // 吸収力（攻撃力）
     public float strength = 0f; // 強度（防御力）
     public float speed = 1f; // スピード
@@ -19,7 +19,7 @@ public class PlayerStatus
     public int rebirthPoint = 0;
 
     // 転生時のリセット処理
-    public void ResetForRebirth()
+    public void StatusInitialize()
     {
         level = 1;
         currentExp = 0f;
@@ -33,6 +33,11 @@ public class PlayerStatus
         size = 1f; // 初期値を1に設定
         attraction = 1f;
         attackSpeed = 1f;
+    }
+    // 転生時のリセット処理
+    public void ResetForRebirth()
+    {
+        StatusInitialize();
         GameManager.Instance.trackRecord.RebirthCount++;
     }
 }

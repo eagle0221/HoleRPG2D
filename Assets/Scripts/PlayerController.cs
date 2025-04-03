@@ -29,13 +29,11 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI sizeText;
     public TextMeshProUGUI attractionText;
     public TextMeshProUGUI attackSpeedText;
-    public TextMeshProUGUI moneyText; // 所持金表示用テキスト
     public EquipmentItem[] equipments = new EquipmentItem[2]; // 装備スロット（2つ）
     public TextMeshProUGUI[] equipmentsName = new TextMeshProUGUI[2]; // 装備スロット（2つ）
     public TextMeshProUGUI[] equipmentsText = new TextMeshProUGUI[2]; // 装備スロット（2つ）
     private bool isEquipPanelOpen = false; // ステータス画面が開いているかどうか
     public Inventory inventory; // インベントリへの参照を追加
-    public int money = 0; // 所持金
     public float invincibilityTime = 1f; // 無敵時間
     private float invincibilityTimer = 0f; // 無敵タイマー
     private bool isInvincible = false; // 無敵状態かどうか
@@ -81,6 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleInput();
         UpdateExpSlider();
+        UpdateUI();
         // 攻撃スピードSliderの更新
         if (enemiesInRange.Count > 0) // 攻撃範囲内に敵がいる場合のみ
         {
@@ -393,13 +392,7 @@ public class PlayerController : MonoBehaviour
         txtHP.text = status.hp.ToString() + " / " + status.maxHp.ToString();
         levelText.text = "Lv: " + status.level.ToString();
         statusPointText.text = "SP: " + status.statusPoint.ToString(); //ステータスポイントの表示を更新
-        UpdateMoneyUI();
         //rebirthPointText.text = "RP: " + status.rebirthPoint.ToString(); // 転生ポイントの表示を削除
-    }
-
-    public void UpdateMoneyUI()
-    {
-        moneyText.text = money.ToString("N0");
     }
 
     void UpdateExpSlider()
@@ -510,10 +503,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void AddMoney(int amount)
+    public void AddMoney(ulong amount)
     {
-        money += amount;
-        UpdateMoneyUI(); // UIを更新
+        GameManager.Instance.resourceInfo.Money += amount;
     }
 
     // ダメージを受ける処理

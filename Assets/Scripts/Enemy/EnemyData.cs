@@ -8,7 +8,7 @@ public class EnemyData : ScriptableObject
     public Sprite enemySprite; // 敵のスプライト
     public EnemyStatus enemyStatus; // 敵のステータス
     public List<DropItemData> dropItems; // ドロップアイテム
-    public int money; // ドロップするお金
+    public ulong money; // ドロップするお金
     public float exp; // ドロップする経験値
     public bool isBoss; // ボスかどうか
 }

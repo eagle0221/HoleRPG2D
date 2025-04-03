@@ -2989,6 +2989,10 @@ MonoBehaviour:
   noButton: {fileID: 350247219}
   admobUnitReward: {fileID: 1987097158}
   playerController: {fileID: 3918662008217793880}
+  uiController: {fileID: 956056110}
+  spawnObject: {fileID: 1952061964}
+  spawnTransform: {fileID: 5096829493154827019}
+  bossSpawner: {fileID: 1888958844718997414}
 --- !u!1 &310923016
 GameObject:
   m_ObjectHideFlags: 0
@@ -10302,7 +10306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &956056106
 RectTransform:
   m_ObjectHideFlags: 0
@@ -43939,13 +43943,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95dd6ed7b2c658b4a8038d55c83135ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sliHP: {fileID: 0}
+  txtHP: {fileID: 0}
+  expSlider: {fileID: 0}
+  levelText: {fileID: 0}
   txtStageName: {fileID: 1026807217}
   txtMoney: {fileID: 1435633184}
   txtChargeCrystal: {fileID: 370223643}
-  sliExp: {fileID: 0}
-  txtExp: {fileID: 0}
-  sliHP: {fileID: 0}
-  txtHP: {fileID: 0}
 --- !u!1 &1692831002
 GameObject:
   m_ObjectHideFlags: 0
@@ -45242,7 +45246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1903698518
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49098,7 +49102,6 @@ MonoBehaviour:
   sizeText: {fileID: 1731328573}
   attractionText: {fileID: 660708689}
   attackSpeedText: {fileID: 1674871445}
-  moneyText: {fileID: 1435633184}
   equipments:
   - {fileID: 0}
   - {fileID: 0}
@@ -49109,7 +49112,6 @@ MonoBehaviour:
   - {fileID: 640266204}
   - {fileID: 1327980519}
   inventory: {fileID: 0}
-  money: 100000
   invincibilityTime: 1
   attackSpeedSlider: {fileID: 7443746423506227906}
   canvas: {fileID: 970837502}

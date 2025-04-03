@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362ea610f0b12374ba159c2997d62ba0, type: 3}
   m_Name: EnemyData1009
   m_EditorClassIdentifier: 
-  enemyName: Black-Skull-CakePiece
+  enemyName: Greey-BloodEyes-CakePiece
   enemySprite: {fileID: 21300000, guid: 19738382d1d964c67808ce76fa4c923c, type: 3}
   enemyStatus:
     maxHp: 3
