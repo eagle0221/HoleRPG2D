@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4508495242884300931}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,3 +181,5 @@ MonoBehaviour:
     isBoss: 0
   damageTextPrefab: {fileID: 4241401722547147461, guid: 872de3b2624befd4899408d92bf04eb0, type: 3}
   itemDropUIController: {fileID: 0}
+  hpBar: {fileID: 0}
+  enemyNameText: {fileID: 0}

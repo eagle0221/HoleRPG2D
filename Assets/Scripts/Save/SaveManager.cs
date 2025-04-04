@@ -117,7 +117,7 @@ public class SaveManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("Inventory not found: " + itemData.itemName);
+                    Debug.Log("Inventory not found: " + itemData.itemName);
                 }
             }
 
@@ -134,7 +134,7 @@ public class SaveManager : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogError("EquipmentItem not found: " + saveData.equipments[i].itemName);
+                        Debug.Log("EquipmentItem not found: " + saveData.equipments[i].itemName);
                     }
                 }
             }

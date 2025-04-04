@@ -6,7 +6,14 @@ public class GameManager : MonoBehaviour
     public GameField CurrentGameField { get; private set; }
     public TrackRecord trackRecord = new();
     public ResourceInfo resourceInfo = new();
+
+    public float gameSpeed = 1f; // ゲームスピード
     
+    public void SetGameSpeed(float speed)
+    {
+        gameSpeed = speed;
+    }
+
     private void Awake()
     {
         // Singleton pattern implementation

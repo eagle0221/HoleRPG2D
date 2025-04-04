@@ -11,6 +11,7 @@ TagManager:
   - EquipItem
   - AbsorbableObject
   - TransitionObject
+  - FieldMove
   layers:
   - Default
   - TransparentFX

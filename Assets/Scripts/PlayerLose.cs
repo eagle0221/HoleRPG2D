@@ -106,6 +106,10 @@ public class PlayerLose : MonoBehaviour
         {
             Destroy(obj);
         }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Boss"))
+        {
+            Destroy(obj);
+        }
         bossSpawner.SetActive(false);
 
         // ボスを再配置（ボス再配置の処理は別途実装が必要です）
