@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
     private bool isAttacking = false; // 攻撃中かどうか
     public Slider hpBar;
     public TextMeshProUGUI enemyNameText;
+    public Transform damageTextTransform;
 
     void Start()
     {
@@ -227,7 +228,7 @@ public class EnemyController : MonoBehaviour
         if (damageTextPrefab != null)
         {
             // ダメージテキストを生成
-            GameObject damageTextObject = Instantiate(damageTextPrefab, transform.position, Quaternion.identity, this.transform);
+            GameObject damageTextObject = Instantiate(damageTextPrefab, transform.position, Quaternion.identity, damageTextTransform);
             // ダメージテキストのスクリプトを取得
             DamageText damageText = damageTextObject.GetComponent<DamageText>();
             // ダメージテキストにダメージ量を設定

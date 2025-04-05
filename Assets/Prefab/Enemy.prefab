@@ -720,6 +720,7 @@ MonoBehaviour:
   itemDropUIController: {fileID: 0}
   hpBar: {fileID: 6557071860470599447}
   enemyNameText: {fileID: 3099897935786098901}
+  damageTextTransform: {fileID: 8297523002330278627}
 --- !u!1 &9204697138376258079
 GameObject:
   m_ObjectHideFlags: 0
