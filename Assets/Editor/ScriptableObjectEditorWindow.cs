@@ -12,6 +12,7 @@ public class ScriptableObjectEditorWindow : EditorWindow
     private List<ScriptableObject> selectedObjects = new List<ScriptableObject>(); // 複数のScriptableObjectを格納するリスト
     private List<Dictionary<string, object>> memberValuesList = new List<Dictionary<string, object>>(); // 複数のScriptableObjectのメンバー値を格納するリスト
     private Vector2 scrollPosition;
+    const int WIDTH = 50;
 
     [MenuItem("Tools/Scriptable Object Editor")]
     public static void ShowWindow()
@@ -130,7 +131,39 @@ public class ScriptableObjectEditorWindow : EditorWindow
         EditorGUILayout.LabelField("Object Name", GUILayout.Width(150));
         foreach (var field in fields)
         {
-            EditorGUILayout.LabelField(field.Name, GUILayout.Width(150));
+            if (field.FieldType == typeof(bool))
+            {
+                EditorGUILayout.LabelField(field.Name, GUILayout.Width(WIDTH));
+            }
+            else if (field.FieldType == typeof(int))
+            {
+                EditorGUILayout.LabelField(field.Name, GUILayout.Width(WIDTH));
+            }
+            else if (field.FieldType == typeof(ulong))
+            {
+                EditorGUILayout.LabelField(field.Name, GUILayout.Width(WIDTH));
+            }
+            else if (field.FieldType == typeof(float))
+            {
+                EditorGUILayout.LabelField(field.Name, GUILayout.Width(WIDTH));
+            }
+            else if (field.FieldType == typeof(string))
+            {
+                EditorGUILayout.LabelField(field.Name, GUILayout.Width(150));
+            }
+            else if (field.FieldType == typeof(Sprite))
+            {
+                EditorGUILayout.LabelField(field.Name, GUILayout.Width(150));
+            }
+            // Enum型の場合
+            else if (field.FieldType.IsEnum)
+            {
+                EditorGUILayout.LabelField(field.Name, GUILayout.Width(WIDTH));
+            }
+            else
+            {
+                EditorGUILayout.LabelField("Unsupported Type", GUILayout.Width(WIDTH));
+            }
         }
         EditorGUILayout.EndHorizontal();
 
@@ -144,7 +177,7 @@ public class ScriptableObjectEditorWindow : EditorWindow
                 if (field.FieldType == typeof(bool))
                 {
                     bool value = (bool)memberValuesList[i][field.Name];
-                    bool newValue = EditorGUILayout.Toggle(value, GUILayout.Width(150));
+                    bool newValue = EditorGUILayout.Toggle(value, GUILayout.Width(WIDTH));
                     if (newValue != value)
                     {
                         field.SetValue(selectedObjects[i], newValue);
@@ -155,7 +188,7 @@ public class ScriptableObjectEditorWindow : EditorWindow
                 else if (field.FieldType == typeof(int))
                 {
                     int value = (int)memberValuesList[i][field.Name];
-                    int newValue = EditorGUILayout.IntField(value, GUILayout.Width(150));
+                    int newValue = EditorGUILayout.IntField(value, GUILayout.Width(WIDTH));
                     if (newValue != value)
                     {
                         field.SetValue(selectedObjects[i], newValue);
@@ -167,7 +200,7 @@ public class ScriptableObjectEditorWindow : EditorWindow
                 {
                     ulong value = (ulong)memberValuesList[i][field.Name];
                     string stringValue = value.ToString();
-                    string newStringValue = EditorGUILayout.TextField(stringValue, GUILayout.Width(150));
+                    string newStringValue = EditorGUILayout.TextField(stringValue, GUILayout.Width(WIDTH));
                     if (ulong.TryParse(newStringValue, out ulong newValue) && newValue != value)
                     {
                         field.SetValue(selectedObjects[i], newValue);
@@ -178,7 +211,7 @@ public class ScriptableObjectEditorWindow : EditorWindow
                 else if (field.FieldType == typeof(float))
                 {
                     float value = (float)memberValuesList[i][field.Name];
-                    float newValue = EditorGUILayout.FloatField(value, GUILayout.Width(150));
+                    float newValue = EditorGUILayout.FloatField(value, GUILayout.Width(WIDTH));
                     if (newValue != value)
                     {
                         field.SetValue(selectedObjects[i], newValue);
@@ -212,7 +245,7 @@ public class ScriptableObjectEditorWindow : EditorWindow
                 else if (field.FieldType.IsEnum)
                 {
                     System.Enum value = (System.Enum)memberValuesList[i][field.Name];
-                    System.Enum newValue = EditorGUILayout.EnumPopup(value, GUILayout.Width(150));
+                    System.Enum newValue = EditorGUILayout.EnumPopup(value, GUILayout.Width(WIDTH));
                     if (!newValue.Equals(value))
                     {
                         field.SetValue(selectedObjects[i], newValue);
@@ -222,7 +255,7 @@ public class ScriptableObjectEditorWindow : EditorWindow
                 }
                 else
                 {
-                    EditorGUILayout.LabelField("Unsupported Type", GUILayout.Width(150));
+                    EditorGUILayout.LabelField("Unsupported Type", GUILayout.Width(WIDTH));
                 }
             }
             EditorGUILayout.EndHorizontal();

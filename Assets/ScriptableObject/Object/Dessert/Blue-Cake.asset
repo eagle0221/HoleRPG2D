@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Blue-Cake
   m_EditorClassIdentifier: 
   objectName: Blue-Cake
-  objectSprite: {fileID: 21300000, guid: f59bdfe805d2b48c49f67e1ea1b41e71, type: 3}
+  objectSprite: {fileID: 21300000, guid: d3c1db53c52214b6b95bdc1d77d8dd82, type: 3}
   moveSpeed: 0
   maxHp: 50
   hp: 50
