@@ -30,7 +30,7 @@ public class AbsorbableObject : MonoBehaviour
         {
             // プレイヤーに向かって移動
             Vector3 direction = (player.position - transform.position).normalized;
-            transform.position += direction * objectData.moveSpeed * Time.deltaTime;
+            transform.position += direction * 5f * Time.deltaTime;
 
             // 縮小
             transform.localScale -= Vector3.one * 2f * Time.deltaTime; // 縮小速度は適宜調整

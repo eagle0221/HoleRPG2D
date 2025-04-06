@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 
-public class AnotherWorldSpawnObject : MonoBehaviour
+public class DessertSpawnObject : MonoBehaviour
 {
     public GameObject objectToSpawn; // 配置するオブジェクトのプレハブ
     [SerializeField] private Transform spawnTransform;
