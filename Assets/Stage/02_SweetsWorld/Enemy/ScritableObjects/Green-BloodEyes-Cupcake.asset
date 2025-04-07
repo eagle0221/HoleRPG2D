@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 362ea610f0b12374ba159c2997d62ba0, type: 3}
-  m_Name: EnemyData1004
+  m_Name: Green-BloodEyes-Cupcake
   m_EditorClassIdentifier: 
   enemyName: Green-BloodEyes-Cupcake
   enemySprite: {fileID: 21300000, guid: f99ac59baca94418ea6b69d5e1fe2378, type: 3}

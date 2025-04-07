@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 362ea610f0b12374ba159c2997d62ba0, type: 3}
-  m_Name: EnemyData1002
+  m_Name: Black-Skull-CakePiece
   m_EditorClassIdentifier: 
-  enemyName: Purple-WitchHat-Spider-CakePiece
-  enemySprite: {fileID: 21300000, guid: 860800645ee6244b6b909bc053128baf, type: 3}
+  enemyName: Black-Skull-CakePiece
+  enemySprite: {fileID: 21300000, guid: 918f36108468a44b98d1b8816e3fab7e, type: 3}
   enemyStatus:
     maxHp: 3
     hp: 3

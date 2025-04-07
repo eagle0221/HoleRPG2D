@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2562107496583256839}
   - component: {fileID: 5875458745715907271}
   m_Layer: 0
-  m_Name: ObjectDessert
+  m_Name: ObjectSweets
   m_TagString: AbsorbableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
