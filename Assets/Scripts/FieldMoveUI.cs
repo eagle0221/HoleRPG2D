@@ -1,8 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
-using System.Collections.Generic;
 
 public class FieldMoveUI : MonoBehaviour
 {
@@ -10,8 +7,8 @@ public class FieldMoveUI : MonoBehaviour
     private Vector3 moveInitPos = new Vector3(0, -9, -1);
     
     [SerializeField] private GameObject windowPanel;
-    public GameObject mainField; // MainFieldのGameObject
-    public GameObject anotherWorld; // AnotherWorldのGameObject
+    public GameObject currentField; // 現在のFieldのGameObject
+    public GameObject nextField;    // 遷移先のWorldのGameObject
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
 
@@ -45,14 +42,19 @@ public class FieldMoveUI : MonoBehaviour
         {
             Destroy(obj);
         }
+        // 既に出現していたオブジェクトを削除
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("AbsorbableObject"))
+        {
+            Destroy(obj);
+        }
         LoadField();
         windowPanel.SetActive(false);
     }
 
     public void LoadField()
     {
-        anotherWorld.SetActive(false);
-        mainField.SetActive(true);
+        currentField.SetActive(false);
+        nextField.SetActive(true);
         // プレイヤーの位置を初期化
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)

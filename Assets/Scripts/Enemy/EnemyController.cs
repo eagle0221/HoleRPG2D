@@ -247,18 +247,14 @@ public class EnemyController : MonoBehaviour
     // プレイヤーとの衝突判定
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("OnCollisionEnter2D");
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("OnCollisionEnter2D:Player");
             // プレイヤーにダメージを与える
             if (attackTimer >= attackInterval)
             {
-                Debug.Log("OnCollisionEnter2D:Player:attackTimer >= attackInterval");
                 PlayerController player = collision.gameObject.GetComponent<PlayerController>();
                 if (player != null)
                 {
-                    Debug.Log("OnCollisionEnter2D:Player:attackTimer >= attackInterval:player != null");
                     player.TakeDamage(status.absorbPower);
                 }
                 attackTimer = 0f;
@@ -269,6 +265,7 @@ public class EnemyController : MonoBehaviour
     // 吸収を開始するメソッド
     public void StartAbsorbing()
     {
+        DropItem();
         isAbsorbing = true;
         rb.linearVelocity = Vector2.zero; // 吸収開始時に移動を停止
     }

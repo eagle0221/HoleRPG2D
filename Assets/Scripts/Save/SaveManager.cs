@@ -1,49 +1,42 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 using System.IO;
-using JetBrains.Annotations;
+using System.Collections;
 
 public class SaveManager : MonoBehaviour
 {
     public PlayerController player;
-    public List<ObjectData> spawnedObjects = new List<ObjectData>();
     private string saveFilePath;
     public Button saveButton;
+    public bool autoSave = true;
+    private float saveInterval = 10f; // セーブ間隔（秒）
+    private float timer = 0f;
 
     void Start()
     {
         saveFilePath = Path.Combine(Application.persistentDataPath, "saveData.json");
         Load();
-        if (spawnedObjects.Count == 0)
-        {
-            //SpawnObjects();
-        }
         saveButton.onClick.AddListener(Save);
+        StartCoroutine(AutoSave()); // 自動セーブを開始
+    }
+
+    void Update()
+    {
+        // タイマーを更新
+        timer += Time.deltaTime;
+    }
+
+    IEnumerator AutoSave()
+    {
+        while (autoSave)
+        {
+            yield return new WaitForSeconds(saveInterval); // 指定された間隔で待機
+            Save(); // セーブを実行
+        }
     }
 
     void Save()
     {
-        // オブジェクトの配置
-        spawnedObjects.Clear();
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("AbsorbableObject"))
-        {
-            AbsorbableObject absorbableObject = obj.GetComponent<AbsorbableObject>();
-            ObjectData objectData = new ObjectData
-            {
-                objectName = absorbableObject.objectData.objectName,
-                objectSpriteName = absorbableObject.objectData.objectSprite.name,
-                moveSpeed = absorbableObject.objectData.moveSpeed,
-                shrinkSpeed = absorbableObject.objectData.shrinkSpeed,
-                minScale = absorbableObject.objectData.minScale,
-                destroyDistance = absorbableObject.objectData.destroyDistance,
-                exp = absorbableObject.objectData.exp,
-                position = obj.transform.position,
-                isAbsorbed = false
-            };
-            spawnedObjects.Add(objectData);
-        }
-        
         // プレイヤー、インベントリ、装備のデータを取得
         Inventory inventory = player.inventory;
         EquipmentItem[] equipmentItems = player.equipments;
@@ -71,11 +64,15 @@ public class SaveManager : MonoBehaviour
         // セーブデータを作成
         SaveData saveData = new SaveData
         {
-            objects = spawnedObjects,
             playerStatus = lPlayerStatus,
             inventoryData = inventoryData,
             equipments = equipmentDatas,
-            trackRecord = GameManager.Instance.trackRecord,
+            trackRecord = new TrackRecord(
+                        GameManager.Instance.trackRecord.PlayerDieCount,
+                        GameManager.Instance.trackRecord.EnemyAbsorbCount,
+                        GameManager.Instance.trackRecord.RebirthCount,
+                        GameManager.Instance.trackRecord.ObjectAbsorbCount
+            ) ,
             resourceInfo = GameManager.Instance.resourceInfo
         };
 
@@ -93,7 +90,6 @@ public class SaveManager : MonoBehaviour
         {
             string json = File.ReadAllText(saveFilePath);
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
-            spawnedObjects = saveData.objects;
 
             // 実績情報ロード
             GameManager.Instance.trackRecord = saveData.trackRecord;

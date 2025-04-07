@@ -9,10 +9,12 @@ public class PlayerLose : MonoBehaviour
     private bool isWindowOpen = false; // ステータス画面が開いているかどうか
     public AdmobUnitReward admobUnitReward;
     public PlayerController playerController; // PlayerControllerへの参照を追加
-    public UIController uiController; // UIControllerへの参照を追加
-    public SpawnObject spawnObject; // SpawnObjectへの参照を追加
+    public ObjectSpawn objectSpawn; // objectSpawnへの参照を追加
     public Transform spawnTransform; // オブジェクトを配置する親オブジェクトのTransform
     public GameObject bossSpawner;   // ボス再配置のオブジェクト
+    public GameObject mainField;     // リセット時に戻るフィールド
+    private GameObject currentField; // 異世界のGameObject
+    private Vector3 returnPosition = new Vector3(0, -9, -1); // リセット時に戻る位置
 
     public static bool deathFlg = false;
 
@@ -77,7 +79,7 @@ public class PlayerLose : MonoBehaviour
     {
         deathFlg = true;
         // フィールドを基本フィールドに移動
-        uiController.LoadMainField();
+        LoadMainField();
 
         // プレイヤーの位置を初期化
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -97,9 +99,8 @@ public class PlayerLose : MonoBehaviour
         {
             Destroy(obj);
         }
-        
         // オブジェクトを再配置
-        spawnObject.Start();
+        objectSpawn.OnEnable();
 
         // 既に出現していた敵/ボスを削除
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
@@ -118,4 +119,18 @@ public class PlayerLose : MonoBehaviour
         HideTransitionPanel();
         deathFlg = false;
     }
+
+    public void LoadMainField()
+    {
+        currentField = GameObject.FindGameObjectWithTag("Field");
+        currentField.SetActive(false);
+        mainField.SetActive(true);
+        // プレイヤーを初期位置に戻す
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            player.transform.position = returnPosition;
+        }
+    }
+
 }

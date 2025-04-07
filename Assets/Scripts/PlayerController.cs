@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 1f;
     public PlayerStatus status = new PlayerStatus(); // ステータス管理クラスのインスタンス
     public GameObject statusPanel; // ステータス画面
     public Button openStatusButton; // ステータス画面を開くボタン
@@ -60,7 +59,6 @@ public class PlayerController : MonoBehaviour
         expSlider.value = status.currentExp;
         UpdateUI(); // UIを初期化
         UpdateStatusText(); // 初期ステータスを表示するために追加
-        UpdateRebirthButtonInteractable(); // 初期状態でボタンの状態を更新
         inventory = GetComponent<Inventory>(); // インベントリを取得
         UpdatePlayerStatus(); // 初期サイズを適用
         attackSpeedSlider.maxValue = 1f; // 最大値を1に設定
@@ -73,6 +71,11 @@ public class PlayerController : MonoBehaviour
         openEquipButton.onClick.AddListener(OpenEquipPanel);
         // 装備画面を閉じるボタンの処理を追加
         closeEquipButton.onClick.AddListener(CloseEquipPanel);
+    }
+
+    void OnEable()
+    {        
+        UpdateRebirthButtonInteractable(); // 初期状態でボタンの状態を更新
     }
 
     void Update()
@@ -152,7 +155,7 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        rb.linearVelocity = moveDirection * moveSpeed;
+        rb.linearVelocity = moveDirection * status.speed;
     }
 
     // プレイヤーをフィールド範囲内に保つ
@@ -270,8 +273,6 @@ public class PlayerController : MonoBehaviour
     {
         // プレイヤーのサイズを更新
         transform.localScale = Vector3.one * status.size;
-        // プレイヤーの移動速度を更新
-        moveSpeed = status.speed;
     }
 
     public void AddExp(float exp)

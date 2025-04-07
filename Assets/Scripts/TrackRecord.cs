@@ -3,10 +3,10 @@ using UnityEngine;
 [System.Serializable]
 public class TrackRecord
 {
-    private ulong playerDieCount;     // プレイヤー○亡回数
-    private ulong enemyAbsorbCount;   // 敵吸収数
-    private ulong rebirthCount;       // 転生回数
-    private ulong objectAbsorbCount;  // オブジェクト吸収回数
+    [SerializeField] private ulong playerDieCount;     // プレイヤー○亡回数
+    [SerializeField] private ulong enemyAbsorbCount;   // 敵吸収数
+    [SerializeField] private ulong rebirthCount;       // 転生回数
+    [SerializeField] private ulong objectAbsorbCount;  // オブジェクト吸収回数
 
     // playerDieCount のプロパティ
     public ulong PlayerDieCount
@@ -35,4 +35,16 @@ public class TrackRecord
         get { return objectAbsorbCount; }
         set { objectAbsorbCount = value; }
     }
+
+    public TrackRecord(ulong playerDieCount, ulong enemyAbsorbCount, ulong rebirthCount, ulong objectAbsorbCount)
+    {
+        this.playerDieCount = playerDieCount;
+        this.enemyAbsorbCount = enemyAbsorbCount;
+        this.rebirthCount = rebirthCount;
+        this.objectAbsorbCount = objectAbsorbCount;
+    }
+    public TrackRecord()
+    {
+    }
+
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
-    public List<ObjectData> objects;    // 配置オブジェクトのリスト
     public PlayerStatus playerStatus;   // プレイヤー情報
     public InventoryData inventoryData; // 所持アイテム
     public EquipmentData[] equipments;  // 装備アイテム

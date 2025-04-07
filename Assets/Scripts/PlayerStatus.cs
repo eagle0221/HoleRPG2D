@@ -13,7 +13,7 @@ public class PlayerStatus
     public float attraction = 1f; // 引力
     public float attackSpeed = 1f; // 攻撃スピード
     public float currentExp = 0f;
-    public float maxExp = 100f;
+    public float maxExp = 10f;
     public int level = 1;
     public int statusPoint = 0;
     public int rebirthPoint = 0;
@@ -23,7 +23,7 @@ public class PlayerStatus
     {
         level = 1;
         currentExp = 0f;
-        maxExp = 100f;
+        maxExp = 10f;
         statusPoint = 0;
         maxHp = 100f;
         hp = maxHp;

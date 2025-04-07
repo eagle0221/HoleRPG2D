@@ -12,6 +12,7 @@ TagManager:
   - AbsorbableObject
   - TransitionObject
   - FieldMove
+  - Field
   layers:
   - Default
   - TransparentFX
