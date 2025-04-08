@@ -31890,7 +31890,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30DB\u30FC\u30EB\u30BF\u30A6\u30F3\u306B\u623B\u308A\u307E\u3059\u304B\uFF1F"
+  m_text: "\u30B9\u30A4\u30FC\u30C4\u306E\u7570\u4E16\u754C\u306B\u8EE2\u79FB\u3057\u307E\u3059\u304B\uFF1F"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 991b87f7f54e09447ba2afc91fb34bf5, type: 2}
   m_sharedMaterial: {fileID: -2422757581339704024, guid: 991b87f7f54e09447ba2afc91fb34bf5, type: 2}
@@ -32047,7 +32047,30 @@ MonoBehaviour:
   spawnTransform: {fileID: 2787650296521841355}
   fieldsPositionStart:
   - {x: -12, y: -9}
-  - {x: 4, y: -9}
+  - {x: 5, y: -9}
+  - {x: -12, y: -8.2}
+  - {x: 5, y: -8.2}
+  - {x: -12, y: -7.4}
+  - {x: 5, y: -7.4}
+  - {x: -12, y: -6.6}
+  - {x: 5, y: -6.6}
+  - {x: -12, y: -5.8}
+  - {x: 5, y: -5.8}
+  - {x: -12, y: -5}
+  - {x: 5, y: -5}
+  - {x: -12, y: -4.2}
+  - {x: 5, y: -4.2}
+  - {x: -12, y: -3.4}
+  - {x: 5, y: -3.4}
+  - {x: -12, y: -2.6}
+  - {x: 5, y: -2.6}
+  - {x: -12, y: -1.8}
+  - {x: 5, y: -1.8}
+  - {x: -12, y: -1}
+  - {x: 5, y: -1}
+  - {x: -12, y: -0.2}
+  - {x: -4, y: -0.2}
+  - {x: 5, y: -0.2}
   fieldsPositionEnd: []
   objectDataLists:
   - {fileID: 11400000, guid: 303fad8592045ed4b8123e7122084102, type: 2}

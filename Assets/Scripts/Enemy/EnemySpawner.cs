@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
         int enemyDataIndex = Random.Range(0, enemyDatas.Count);
 
         // ランダムな位置を生成
-        Vector2 spawnPosition = GetRandomSpawnPosition();
+        Vector3 spawnPosition = GetRandomSpawnPosition();
 
         // 敵を生成
         GameObject enemyObject = Instantiate(enemyPrefabs[enemyPrefabIndex], spawnPosition, Quaternion.identity);
@@ -46,11 +46,11 @@ public class EnemySpawner : MonoBehaviour
     }
 
     // ランダムな生成位置を取得するメソッド
-    Vector2 GetRandomSpawnPosition()
+    Vector3 GetRandomSpawnPosition()
     {
         float x = Random.Range(minX, maxX);
         float y = Random.Range(minY, maxY);
-        return new Vector2(x, y);
+        return new Vector3(x, y, -3);
     }
 
 }

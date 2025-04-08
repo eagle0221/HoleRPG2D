@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39e2bc5df0ebd649ae731ddb0b7aa4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strStageName: "\u30C7\u30B6\u30FC\u30C8\u306E\u7570\u4E16\u754C"
+  strStageName: "\u30B9\u30A4\u30FC\u30C4\u306E\u7570\u4E16\u754C"
   minX: -13
   maxX: 13
   minY: -10
@@ -2747,7 +2747,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossPrefab: {fileID: 6808867673518432313, guid: ad681f3fa8ef4fe459d75da1946e03c8, type: 3}
-  bossData: {fileID: 11400000, guid: 122481f34e9b9ec40af5c6584eb955ed, type: 2}
+  bossData: {fileID: 11400000, guid: 2f288aaeda7ba6e44921b750455a0630, type: 2}
 --- !u!1 &4831264123048358402
 GameObject:
   m_ObjectHideFlags: 0
@@ -32125,9 +32125,59 @@ MonoBehaviour:
   spawnTransform: {fileID: 8495241101642864706}
   fieldsPositionStart:
   - {x: -12, y: -9}
-  - {x: 4, y: -9}
+  - {x: 5, y: -9}
+  - {x: -12, y: -8.2}
+  - {x: 5, y: -8.2}
+  - {x: -12, y: -7.4}
+  - {x: 5, y: -7.4}
+  - {x: -12, y: -6.6}
+  - {x: 5, y: -6.6}
+  - {x: -12, y: -5.8}
+  - {x: 5, y: -5.8}
+  - {x: -12, y: -5}
+  - {x: 5, y: -5}
+  - {x: -12, y: -4.2}
+  - {x: 5, y: -4.2}
+  - {x: -12, y: -3.4}
+  - {x: 5, y: -3.4}
+  - {x: -12, y: -2.6}
+  - {x: 5, y: -2.6}
+  - {x: -12, y: -1.8}
+  - {x: 5, y: -1.8}
+  - {x: -12, y: -1}
+  - {x: 5, y: -1}
+  - {x: -12, y: -0.2}
+  - {x: -3.4, y: -0.2}
+  - {x: 5, y: -0.2}
+  - {x: -12, y: 0.6}
+  - {x: -3.4, y: 0.6}
+  - {x: 5, y: 0.6}
+  - {x: -12, y: 1.4}
+  - {x: -3.4, y: 1.4}
+  - {x: 5, y: 1.4}
+  - {x: -12, y: 2.2}
+  - {x: -3.4, y: 2.2}
+  - {x: 5, y: 2.2}
+  - {x: -12, y: 3}
+  - {x: -3.4, y: 3}
+  - {x: 5, y: 3}
+  - {x: -12, y: 3.8}
+  - {x: 5, y: 3.8}
+  - {x: -12, y: 4.6}
+  - {x: 5, y: 4.6}
+  - {x: -12, y: 5.4}
+  - {x: 5, y: 5.4}
+  - {x: -12, y: 6.2}
+  - {x: 5, y: 6.2}
+  - {x: -12, y: 7}
+  - {x: 5, y: 7}
+  - {x: -12, y: 7.8}
+  - {x: 5, y: 7.8}
+  - {x: -12, y: 8.6}
+  - {x: 5, y: 8.6}
+  - {x: -12, y: 9.4}
+  - {x: 5, y: 9.4}
   fieldsPositionEnd: []
-  lectLine: 3
   objectDataLists:
   - {fileID: 11400000, guid: bd05ab3c0f9c03344a5a68f38aa17217, type: 2}
   - {fileID: 11400000, guid: 3e3a8a26b5d88c746adc692b9a8f11f3, type: 2}
@@ -32158,6 +32208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2415331826639445381}
+  - component: {fileID: 8937348714183078434}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -32180,6 +32231,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1661207962952412113}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8937348714183078434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083397756877489941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c64e9e33a61cb419f5331e418d84d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefabs:
+  - {fileID: 6808867673518432313, guid: ad681f3fa8ef4fe459d75da1946e03c8, type: 3}
+  enemyDatas:
+  - {fileID: 11400000, guid: c9d9f9e23d709d3428f982736b59d69b, type: 2}
+  - {fileID: 11400000, guid: d2ed6da7a8fa78147b3c71ca00f7d6d9, type: 2}
+  - {fileID: 11400000, guid: 9f08d1ecb79d9e3489723d487bde2629, type: 2}
+  - {fileID: 11400000, guid: 1a9bdb72cea1a0d41b9333b7788773b8, type: 2}
+  - {fileID: 11400000, guid: f49852f425b18504e907a48cdd4bd24d, type: 2}
+  - {fileID: 11400000, guid: bf2141fa23f5b5a41b879a07550782f1, type: 2}
+  - {fileID: 11400000, guid: 403b2df58c6f35c4d80bf77f31190a6f, type: 2}
+  - {fileID: 11400000, guid: e989035c8fa6162468e513995fc4ea11, type: 2}
+  enemySpawnInterval: 5
+  minX: -13
+  maxX: 13
+  minY: -10
+  maxY: 10
 --- !u!1 &8942156891380437269
 GameObject:
   m_ObjectHideFlags: 0
@@ -32368,11 +32447,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e5b328afeef2e4f9881cca60301b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windowPanel: {fileID: 0}
-  mainField: {fileID: 0}
-  anotherWorld: {fileID: 9085974175334129009}
-  yesButton: {fileID: 0}
-  noButton: {fileID: 0}
+  windowPanel: {fileID: 4831264123048358402}
+  currentField: {fileID: 9085974175334129009}
+  nextField: {fileID: 0}
+  yesButton: {fileID: 8488964365871021559}
+  noButton: {fileID: 204606757600080059}
 --- !u!1 &9085974175334129009
 GameObject:
   m_ObjectHideFlags: 0
