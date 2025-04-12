@@ -17,6 +17,7 @@ public class PlayerStatus
     public int level = 1;
     public int statusPoint = 0;
     public int rebirthPoint = 0;
+    private const int REBIRTH_POINT = 5;
 
     // 転生時のリセット処理
     public void StatusInitialize()

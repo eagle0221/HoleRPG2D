@@ -40,11 +40,16 @@ public class PlayerController : MonoBehaviour
     private List<EnemyController> enemiesInRange = new List<EnemyController>(); // 攻撃範囲内の敵を管理するリスト
     private EnemyController targetEnemy; // 攻撃対象の敵
     public Canvas canvas; // Canvasへの参照を追加
+    public GameObject rebirthPanel; // 転生パネル
     public Button rebirthButton; // 転生ボタンへの参照を追加
+    public Button adsButton;     // 広告を見て転生ボタン
+    public Button yesButton;     // 転生ボタンYesボタン
+    public Button noButton;      // キャンセルボタン
     public GameObject equipPanel; // 装備画面
     public Button openEquipButton; // 装備画面を開くボタン
     public Button closeEquipButton; // 装備画面を閉じるボタン
     public GameObject loseWindow; // 負画面
+    public AdmobUnitReward admobUnitReward;
 
     void Awake()
     {
@@ -71,6 +76,12 @@ public class PlayerController : MonoBehaviour
         openEquipButton.onClick.AddListener(OpenEquipPanel);
         // 装備画面を閉じるボタンの処理を追加
         closeEquipButton.onClick.AddListener(CloseEquipPanel);
+        // 転生ボタンの処理を追加
+        rebirthButton.onClick.AddListener(OnRebirthButtonClicked);
+        adsButton.interactable = false;
+        adsButton.onClick.AddListener(OnAdsButtonClicked);
+        yesButton.onClick.AddListener(OnYesButtonClicked);
+        noButton.onClick.AddListener(OnNoButtonClicked);
     }
 
     void OnEable()
@@ -295,17 +306,52 @@ public class PlayerController : MonoBehaviour
     }
 
     // 転生処理
-    public void Rebirth()
+    public void OnRebirthButtonClicked()
+    {
+        rebirthPanel.SetActive(true);
+        adsButton.interactable = admobUnitReward.IsReady;
+    }
+
+    private void OnAdsButtonClicked()
+    {
+        //HideTransitionPanel();
+        admobUnitReward.ShowRewardAd((reward) =>
+        {
+            if (reward != null)
+            {
+                Debug.Log("Reward type: " + reward.Type);
+                Debug.Log("Reward received: " + reward.Amount);
+                Rebirth();
+            }
+        });
+        adsButton.interactable = false;
+    }
+
+    private void Rebirth()
+    {
+        status.ResetForRebirth();
+        status.rebirthPoint++;
+        status.statusPoint += status.rebirthPoint; // 転生ポイントをステータスポイントに加算
+    }
+    private void OnYesButtonClicked()
     {
         if (status.level >= REBIRTH_LEVEL) // 例：レベル10以上で転生可能
         {
-            status.ResetForRebirth();
-            status.rebirthPoint++;
-            status.statusPoint += status.rebirthPoint; // 転生ポイントをステータスポイントに加算
+            Rebirth();
+            rebirthPanel.SetActive(false);
             UpdateStatusText();
             UpdateUI();
             UpdateRebirthButtonInteractable(); // 転生後にボタンの状態を更新
         }
+        else
+        {
+            Debug.Log("レベルが足りません");
+        }
+    }
+
+    private void OnNoButtonClicked()
+    {
+        rebirthPanel.SetActive(false);
     }
 
     // 転生ボタンのインタラクションを更新するメソッド
@@ -314,6 +360,10 @@ public class PlayerController : MonoBehaviour
         if (rebirthButton != null)
         {
             rebirthButton.interactable = status.level >= REBIRTH_LEVEL;
+        }
+        else
+        {
+            Debug.Log("rebirthButton is null");
         }
     }
 

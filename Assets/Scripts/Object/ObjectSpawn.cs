@@ -14,8 +14,6 @@ public class ObjectSpawn : MonoBehaviour
     private List<Vector3> positions = new List<Vector3>();
     public List<AbsorbableObjectData> objectDataLists; // オブジェクトのデータ
 
-    
-
     public void OnEnable()
     {
         if(positions != null)
@@ -35,15 +33,11 @@ public class ObjectSpawn : MonoBehaviour
             absorbableObject.GetComponent<SpriteRenderer>().sprite = objectDataLists[rnd].objectSprite;
             absorbableObject.objectData = objectDataLists[rnd];
         }
-        Debug.Log("positionInitialize End");
-        Debug.Log(GameObject.FindGameObjectsWithTag("AbsorbableObject").Count());
     }
     public void positionInitialize()
     {
         float x = 0f;
         float y = 0f;
-        Debug.Log("positionInitialize Start");
-        Debug.Log(fieldsPositionStart.Count());
         for(int i = 0; i < fieldsPositionStart.Count(); i++)
         {
             x = 0f;
@@ -54,6 +48,5 @@ public class ObjectSpawn : MonoBehaviour
             }
             //y += 0.8f;
         }
-        Debug.Log("positions.Count(): " + positions.Count());
     }
 }
