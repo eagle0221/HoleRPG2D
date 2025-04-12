@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     private float attackTimer = 0f; // 攻撃タイマー
     private float attackInterval = 0f; // 攻撃間隔
     public GameObject damageTextPrefab; // ダメージテキストのプレハブを追加
-    private bool isAbsorbing = false; // 吸収中かどうか
+    public bool isAbsorbing = false; // 吸収中かどうか
     public ItemDropUIController itemDropUIController; // ItemDropUIControllerへの参照を追加
     private List<PlayerController> playersInRange = new List<PlayerController>(); // 攻撃範囲内のプレイヤーを管理するリスト
     private bool isAttacking = false; // 攻撃中かどうか
@@ -211,7 +211,7 @@ public class EnemyController : MonoBehaviour
     {
         // 防御力を考慮してダメージを計算
         float actualDamage = Mathf.Max(0, damage - status.strength);
-        UpdateEnemyStatus(); // サイズ変更を反映
+        //UpdateEnemyStatus(); // サイズ変更を反映
         status.hp -= actualDamage;
         UpdateHpBar(status.hp);
         // ダメージテキストを表示
@@ -265,6 +265,7 @@ public class EnemyController : MonoBehaviour
     // 吸収を開始するメソッド
     public void StartAbsorbing()
     {
+        SoundManager.instance.PlaySE(SELineup.ABSORB_SE);
         DropItem();
         isAbsorbing = true;
         rb.linearVelocity = Vector2.zero; // 吸収開始時に移動を停止

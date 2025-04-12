@@ -93,6 +93,7 @@ public class PlayerLose : MonoBehaviour
 
         // プレイヤーステータスの初期化
         playerController.status.StatusInitialize();
+        playerController.status.statusPoint += playerController.status.rebirthPoint; // 転生ポイントをステータスポイントに加算
 
         // 既に出現していたオブジェクトを削除
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("AbsorbableObject"))
@@ -123,8 +124,11 @@ public class PlayerLose : MonoBehaviour
     public void LoadMainField()
     {
         currentField = GameObject.FindGameObjectWithTag("Field");
-        currentField.SetActive(false);
-        mainField.SetActive(true);
+        if(currentField.name != mainField.name)
+        {
+            currentField.SetActive(false);
+            mainField.SetActive(true);
+        }
         // プレイヤーを初期位置に戻す
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
