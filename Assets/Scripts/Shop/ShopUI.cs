@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -11,8 +10,14 @@ public class ShopUI : MonoBehaviour
     public GameObject shopItemButtonPrefab;
     public Transform shopItemListContent;
     public Button closeButton;
-    public GameObject openShop;
-    public Button openButton;
+
+    void OnEnable()
+    {
+        if(gameObject.activeInHierarchy)
+        {
+            OpenShopPanel();
+        }
+    }
 
     void Start()
     {
@@ -21,14 +26,11 @@ public class ShopUI : MonoBehaviour
 
     public void OpenShopPanel()
     {
-        openShop.SetActive(false);
-        shopPanel.SetActive(true);
         UpdateShopItemList();
     }
 
     public void CloseShopPanel()
     {
-        openShop.SetActive(true);
         shopPanel.SetActive(false);
     }
 

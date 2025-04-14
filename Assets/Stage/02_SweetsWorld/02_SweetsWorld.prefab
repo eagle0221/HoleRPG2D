@@ -32464,11 +32464,11 @@ GameObject:
   - component: {fileID: 5469133863965881662}
   m_Layer: 0
   m_Name: 02_SweetsWorld
-  m_TagString: Untagged
+  m_TagString: Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1661207962952412113
 Transform:
   m_ObjectHideFlags: 0

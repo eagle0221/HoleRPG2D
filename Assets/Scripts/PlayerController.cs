@@ -321,18 +321,19 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Reward type: " + reward.Type);
                 Debug.Log("Reward received: " + reward.Amount);
-                Rebirth();
+                AdsRebirth();
             }
         });
         adsButton.interactable = false;
     }
 
-    private void Rebirth()
+    private void AdsRebirth()
     {
         status.ResetForRebirth();
         status.rebirthPoint++;
-        status.statusPoint += status.rebirthPoint; // 転生ポイントをステータスポイントに加算
+        status.statusPoint = status.statusPoint + (status.rebirthPoint * PlayerStatus.REBIRTH_POINT); // 転生ポイントをステータスポイントに加算
     }
+
     private void OnYesButtonClicked()
     {
         if (status.level >= REBIRTH_LEVEL) // 例：レベル10以上で転生可能
@@ -347,6 +348,13 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("レベルが足りません");
         }
+    }
+
+    private void Rebirth()
+    {
+        status.ResetForRebirth();
+        status.rebirthPoint++;
+        status.statusPoint += status.rebirthPoint; // 転生ポイントをステータスポイントに加算
     }
 
     private void OnNoButtonClicked()

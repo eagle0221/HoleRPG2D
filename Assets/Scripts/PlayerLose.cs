@@ -6,7 +6,7 @@ public class PlayerLose : MonoBehaviour
     public GameObject transitionPanel;
     public Button yesButton;
     public Button noButton;
-    private bool isWindowOpen = false; // ステータス画面が開いているかどうか
+    private bool isWindowOpen = false; // ウィンドウが開いているかどうか
     public AdmobUnitReward admobUnitReward;
     public PlayerController playerController; // PlayerControllerへの参照を追加
     public ObjectSpawn objectSpawn; // objectSpawnへの参照を追加
@@ -20,12 +20,12 @@ public class PlayerLose : MonoBehaviour
 
     void OnEnable()
     {
-        isWindowOpen = true; // ステータス画面が開いているかどうか
+        isWindowOpen = true; // ウィンドウが開いているかどうか
     }
 
     void OnDisable()
     {
-        isWindowOpen = false; // ステータス画面が開いているかどうか
+        isWindowOpen = false; // ウィンドウが開いているかどうか
     }
 
     void Start()
