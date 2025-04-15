@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 362ea610f0b12374ba159c2997d62ba0, type: 3}
-  m_Name: EnemyData1
+  m_Name: "02_\u30B9\u30E9\u30A4\u30E0"
   m_EditorClassIdentifier: 
-  enemyName: "\u65751"
-  enemySprite: {fileID: -174417076182803540, guid: c00ef2fff0cd0d84e9f6f2b70c788726, type: 3}
+  enemyName: "\u30B9\u30E9\u30A4\u30E0"
+  enemySprite: {fileID: 7773383452084464067, guid: ae088cccad874014dbdda6da04a5e0c4, type: 3}
   enemyStatus:
-    maxHp: 3
-    hp: 3
-    absorbPower: 2
+    maxHp: 5
+    hp: 5
+    absorbPower: 3
     strength: 0
     speed: 1
     size: 1
@@ -25,9 +25,7 @@ MonoBehaviour:
     minScale: 0
     destroyDistance: 0
     isBoss: 0
-  dropItems:
-  - item: {fileID: 11400000, guid: a016306eb4594914fa58d3f0acd3b4a7, type: 2}
-    dropRate: 0.01
+  dropItems: []
   money: 1
   exp: 10
   isBoss: 0

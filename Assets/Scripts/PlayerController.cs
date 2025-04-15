@@ -65,7 +65,6 @@ public class PlayerController : MonoBehaviour
         UpdateUI(); // UIを初期化
         UpdateStatusText(); // 初期ステータスを表示するために追加
         inventory = GetComponent<Inventory>(); // インベントリを取得
-        UpdatePlayerStatus(); // 初期サイズを適用
         attackSpeedSlider.maxValue = 1f; // 最大値を1に設定
         attackSpeedSlider.value = 0f; // 初期値を0に設定
         // ステータス画面を開くボタンの処理を追加
@@ -84,9 +83,9 @@ public class PlayerController : MonoBehaviour
         noButton.onClick.AddListener(OnNoButtonClicked);
     }
 
-    void OnEable()
-    {        
-        UpdateRebirthButtonInteractable(); // 初期状態でボタンの状態を更新
+    void Start()
+    {
+        UpdatePlayerStatus(); // 初期サイズを適用
     }
 
     void Update()
@@ -302,7 +301,6 @@ public class PlayerController : MonoBehaviour
         status.statusPoint += 3; // レベルアップ時にステータスポイントを付与
         status.hp = status.maxHp; // レベルアップ時HPを全回復
         UpdateUI();
-        UpdateRebirthButtonInteractable(); // レベルアップ時にボタンの状態を更新
     }
 
     // 転生処理
@@ -310,28 +308,41 @@ public class PlayerController : MonoBehaviour
     {
         rebirthPanel.SetActive(true);
         adsButton.interactable = admobUnitReward.IsReady;
+        Debug.Log((int)Mathf.Floor(GameManager.Instance.trackRecord.RebirthCount/10));
     }
 
     private void OnAdsButtonClicked()
     {
-        //HideTransitionPanel();
-        admobUnitReward.ShowRewardAd((reward) =>
+        if (status.level >= REBIRTH_LEVEL) // 例：レベル10以上で転生可能
         {
-            if (reward != null)
+            //HideTransitionPanel();
+            admobUnitReward.ShowRewardAd((reward) =>
             {
-                Debug.Log("Reward type: " + reward.Type);
-                Debug.Log("Reward received: " + reward.Amount);
-                AdsRebirth();
-            }
-        });
-        adsButton.interactable = false;
+                if (reward != null)
+                {
+                    Debug.Log("Reward type: " + reward.Type);
+                    Debug.Log("Reward received: " + reward.Amount);
+                    AdsRebirth();
+                }
+            });
+            adsButton.interactable = false;
+        }
+        else
+        {
+            Debug.Log("レベルが足りません");
+        }
     }
 
     private void AdsRebirth()
     {
         status.ResetForRebirth();
         status.rebirthPoint++;
-        status.statusPoint = status.statusPoint + (status.rebirthPoint * PlayerStatus.REBIRTH_POINT); // 転生ポイントをステータスポイントに加算
+        status.statusPoint = status.statusPoint + (status.rebirthPoint * PlayerStatus.REBIRTH_POINT) + (int)Mathf.Floor(GameManager.Instance.trackRecord.RebirthCount/10); // 転生ポイントをステータスポイントに加算
+        rebirthPanel.SetActive(false);
+        UpdateStatusText();
+        UpdateUI();
+        UpdateRebirthButtonInteractable(); // 転生後にボタンの状態を更新
+        UpdatePlayerStatus();
     }
 
     private void OnYesButtonClicked()
@@ -343,6 +354,7 @@ public class PlayerController : MonoBehaviour
             UpdateStatusText();
             UpdateUI();
             UpdateRebirthButtonInteractable(); // 転生後にボタンの状態を更新
+            UpdatePlayerStatus();
         }
         else
         {
@@ -354,7 +366,7 @@ public class PlayerController : MonoBehaviour
     {
         status.ResetForRebirth();
         status.rebirthPoint++;
-        status.statusPoint += status.rebirthPoint; // 転生ポイントをステータスポイントに加算
+        status.statusPoint += status.rebirthPoint + (int)Mathf.Floor(GameManager.Instance.trackRecord.RebirthCount/10); // 転生ポイントをステータスポイントに加算
     }
 
     private void OnNoButtonClicked()
@@ -380,6 +392,7 @@ public class PlayerController : MonoBehaviour
     {
         statusPanel.SetActive(true);
         UpdateStatusText(); // ステータス割り振りパネルを開いたときにステータスを表示するために追加
+        UpdateRebirthButtonInteractable();
         isStatusPanelOpen = true; // ステータス画面が開いていることを記録
     }
 
@@ -509,7 +522,6 @@ public class PlayerController : MonoBehaviour
             case EquipmentItem.EquipmentType.Size:
                 status.size += item.value;
                 status.size = Mathf.Clamp(status.size, 1f, 500f); // 最大値を500に制限
-                UpdatePlayerStatus(); // サイズ変更を反映
                 break;
             case EquipmentItem.EquipmentType.Attraction:
                 status.attraction += item.value;
@@ -539,7 +551,6 @@ public class PlayerController : MonoBehaviour
             case EquipmentItem.EquipmentType.Size:
                 status.size -= item.value;
                 status.size = Mathf.Clamp(status.size, 1f, 500f); // 最大値を500に制限
-                UpdatePlayerStatus(); // サイズ変更を反映
                 break;
             case EquipmentItem.EquipmentType.Attraction:
                 status.attraction -= item.value;

@@ -48,7 +48,7 @@ public class SaveManager : MonoBehaviour
             if (equipmentItems[i] != null)
             {
                 equipmentDatas[i] = new EquipmentData(equipmentItems[i]); // EquipmentDataのコンストラクタを使用
-                player.UnEquip(equipmentItems[i]);
+                //player.UnEquip(equipmentItems[i]);
             }
             else
             {
@@ -126,7 +126,7 @@ public class SaveManager : MonoBehaviour
                     EquipmentItem item = Resources.Load<EquipmentItem>("Equipment/" + saveData.equipments[i].itemName);
                     if (item != null)
                     {
-                        player.Equip(item);
+                        player.equipments[i] = item;
                     }
                     else
                     {

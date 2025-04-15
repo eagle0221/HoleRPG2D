@@ -704,7 +704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   enemyData: {fileID: 11400000, guid: 32d914b10ccb95a42a4d7a3d812349b9, type: 2}
-  equipmentObjectPrefab: {fileID: 5776303842293369613, guid: 9cc5bc8c5d2c08c45bf915da42f96752, type: 3}
+  equipmentObjectPrefab: {fileID: 5162123789925144648, guid: 457f6dcb390a8ef4aa41db2c0ee6e1dc, type: 3}
   status:
     maxHp: 0
     hp: 0
@@ -717,6 +717,7 @@ MonoBehaviour:
     destroyDistance: 0
     isBoss: 0
   damageTextPrefab: {fileID: 4241401722547147461, guid: 872de3b2624befd4899408d92bf04eb0, type: 3}
+  isAbsorbing: 0
   itemDropUIController: {fileID: 0}
   hpBar: {fileID: 6557071860470599447}
   enemyNameText: {fileID: 3099897935786098901}
