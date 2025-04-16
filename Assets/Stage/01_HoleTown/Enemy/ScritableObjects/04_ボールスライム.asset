@@ -15,15 +15,15 @@ MonoBehaviour:
   enemyName: "\u30DC\u30FC\u30EB\u30B9\u30E9\u30A4\u30E0"
   enemySprite: {fileID: -4194405017652256387, guid: d2d01514a2e74854ab0b5b30c3e55b4d, type: 3}
   enemyStatus:
-    maxHp: 6
-    hp: 6
+    maxHp: 35
+    hp: 35
     absorbPower: 5
-    strength: 0
-    speed: 1
-    size: 1
-    attackSpeed: 1
-    minScale: 0
-    destroyDistance: 0
+    strength: 1
+    speed: 2.8
+    size: 1.1
+    attackSpeed: 1.2
+    minScale: 0.1
+    destroyDistance: 0.5
     isBoss: 0
   dropItems: []
   money: 1

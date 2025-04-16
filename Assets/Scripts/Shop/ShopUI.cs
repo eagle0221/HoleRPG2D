@@ -10,12 +10,14 @@ public class ShopUI : MonoBehaviour
     public GameObject shopItemButtonPrefab;
     public Transform shopItemListContent;
     public Button closeButton;
+    public TextMeshProUGUI messageText;
 
     void OnEnable()
     {
         if(gameObject.activeInHierarchy)
         {
             OpenShopPanel();
+            messageText.text = "";
         }
     }
 
@@ -61,9 +63,12 @@ public class ShopUI : MonoBehaviour
         {
             GameManager.Instance.resourceInfo.Money -= shopItem.price;
             player.inventory.AddItem(shopItem.item);
+            messageText.text = shopItem.item.itemName + "を購入しました";
+            Debug.Log(shopItem.item.itemName + "を購入しました");
         }
         else
         {
+            messageText.text = "お金が足りません";
             Debug.Log("お金が足りません");
         }
     }

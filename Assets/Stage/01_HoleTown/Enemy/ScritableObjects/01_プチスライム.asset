@@ -15,19 +15,19 @@ MonoBehaviour:
   enemyName: "\u30D7\u30C1\u30B9\u30E9\u30A4\u30E0"
   enemySprite: {fileID: -174417076182803540, guid: c00ef2fff0cd0d84e9f6f2b70c788726, type: 3}
   enemyStatus:
-    maxHp: 3
-    hp: 3
+    maxHp: 15
+    hp: 15
     absorbPower: 2
     strength: 0
-    speed: 1
-    size: 1
-    attackSpeed: 1
-    minScale: 0
-    destroyDistance: 0
+    speed: 1.5
+    size: 0.7
+    attackSpeed: 0.5
+    minScale: 0.1
+    destroyDistance: 0.5
     isBoss: 0
   dropItems:
   - item: {fileID: 11400000, guid: a016306eb4594914fa58d3f0acd3b4a7, type: 2}
     dropRate: 0.01
-  money: 1
-  exp: 10
+  money: 2
+  exp: 1
   isBoss: 0
