@@ -126,6 +126,7 @@ public class ScriptableObjectEditorWindow : EditorWindow
         var fields = selectedObjects[0].GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
 
         EditorGUILayout.BeginVertical();
+/*
         // フィールド名のラベルを作成
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Object Name", GUILayout.Width(150));
@@ -166,14 +167,18 @@ public class ScriptableObjectEditorWindow : EditorWindow
             }
         }
         EditorGUILayout.EndHorizontal();
-
+*/
         // データを作成
         for (int i = 0; i < selectedObjects.Count; i++)
         {
             EditorGUILayout.BeginHorizontal();
+            /*
             EditorGUILayout.LabelField(selectedObjects[i].name, GUILayout.Width(150));
+            */
+            Editor.CreateEditor(selectedObjects[i]).DrawDefaultInspector();
             foreach (var field in fields)
             {
+                /*
                 if (field.FieldType == typeof(bool))
                 {
                     bool value = (bool)memberValuesList[i][field.Name];
@@ -255,8 +260,11 @@ public class ScriptableObjectEditorWindow : EditorWindow
                 }
                 else
                 {
-                    EditorGUILayout.LabelField("Unsupported Type", GUILayout.Width(WIDTH));
+                    Editor.CreateEditor(selectedObjects[i]).DrawDefaultInspector();
+                    //EditorGUIUtility.
+                    //EditorGUILayout.LabelField("Unsupported Type", GUILayout.Width(WIDTH));
                 }
+                */
             }
             EditorGUILayout.EndHorizontal();
         }
