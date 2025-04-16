@@ -11,7 +11,11 @@ public class AdmobUnitReward : AdmobUnitBase
     {
         get
         {
-            if (AdmobManager.Instance.IsReady == false)
+            if(AdmobManager.Instance == null)
+            {
+                return false;
+            }
+            else if (AdmobManager.Instance.IsReady == false)
             {
                 return false;
             }

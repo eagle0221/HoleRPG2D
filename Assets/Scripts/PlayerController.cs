@@ -2,7 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 
 public class PlayerController : MonoBehaviour
 {
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
     public Button closeEquipButton; // 装備画面を閉じるボタン
     public GameObject loseWindow; // 負画面
     public AdmobUnitReward admobUnitReward;
+    public GameObject levelupEffect;  // レベルアップ時のエフェクト
 
     void Awake()
     {
@@ -301,6 +304,32 @@ public class PlayerController : MonoBehaviour
         status.statusPoint += 3; // レベルアップ時にステータスポイントを付与
         status.hp = status.maxHp; // レベルアップ時HPを全回復
         UpdateUI();
+
+        // レベルアップ時の効果音/エフェクト
+        SoundManager.instance.PlaySE(SELineup.LEVELUP_SE);
+        if (levelupEffect != null) // エフェクトが設定されているか確認
+        {
+            levelupEffect.SetActive(true);
+            // エフェクトを1秒後に非表示にするコルーチンを開始
+            StartCoroutine(HideEffectAfterDelay(levelupEffect, 1.0f));
+        }
+        else
+        {
+            Debug.LogWarning("LevelUpEffectが設定されていません。");
+        }
+    }
+
+    // 指定した秒数後にGameObjectを非アクティブにするコルーチン
+    private IEnumerator HideEffectAfterDelay(GameObject effectObject, float delay)
+    {
+        // 指定された秒数だけ待機
+        yield return new WaitForSeconds(delay);
+
+        // エフェクトを非表示にする
+        if (effectObject != null) // コルーチン実行中にオブジェクトが破棄されていないか確認
+        {
+            effectObject.SetActive(false);
+        }
     }
 
     // 転生処理

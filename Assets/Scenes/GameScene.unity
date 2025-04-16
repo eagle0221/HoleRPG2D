@@ -2561,7 +2561,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -132, y: 290.64}
+  m_AnchoredPosition: {x: -14, y: 36.760452}
   m_SizeDelta: {x: 200, y: 32.241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &238467400
@@ -7259,7 +7259,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -132, y: 258.4}
+  m_AnchoredPosition: {x: -14, y: 4.5204315}
   m_SizeDelta: {x: 200, y: 32.241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &802850865
@@ -8570,6 +8570,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2037189963875749251, guid: 1fdd5d5501d1dbc4a945eb3d869f58e5, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4629694447844198439, guid: 1fdd5d5501d1dbc4a945eb3d869f58e5, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -8984,7 +8988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1158744998
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9805,7 +9809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1284131463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10617,7 +10621,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1434031243
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10638,7 +10642,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -121, y: -154}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1434031244
@@ -13489,7 +13493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -132, y: 226.16}
+  m_AnchoredPosition: {x: -14, y: -27.719559}
   m_SizeDelta: {x: 200, y: 32.241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1763686059
@@ -14824,7 +14828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1987097157
 Transform:
   m_ObjectHideFlags: 0
@@ -15182,7 +15186,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -132, y: 322.87955}
+  m_AnchoredPosition: {x: -14, y: 69}
   m_SizeDelta: {x: 200, y: 32.241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2039672548
@@ -15735,7 +15739,7 @@ MonoBehaviour:
     absorbPower: 3
     strength: 0
     speed: 1
-    size: 1
+    size: 0.5
     attraction: 1
     attackSpeed: 1
     currentExp: 0
@@ -15782,6 +15786,7 @@ MonoBehaviour:
   closeEquipButton: {fileID: 1656047336}
   loseWindow: {fileID: 310386883}
   admobUnitReward: {fileID: 1987097158}
+  levelupEffect: {fileID: 9255333}
 --- !u!1 &4340840396202900932
 GameObject:
   m_ObjectHideFlags: 0
