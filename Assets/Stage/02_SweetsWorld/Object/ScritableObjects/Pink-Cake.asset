@@ -20,7 +20,7 @@ MonoBehaviour:
   absorbPower: 3
   strength: 0
   speed: 0
-  size: 1
+  size: 0.1
   attraction: 1
   attackSpeed: 1
   shrinkSpeed: 2

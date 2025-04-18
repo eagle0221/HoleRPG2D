@@ -26,7 +26,7 @@ MonoBehaviour:
     destroyDistance: 0.5
     isBoss: 0
   dropItems:
-  - item: {fileID: 11400000, guid: 7f559aa40c313954a9e8ec602ae270bf, type: 2}
+  - item: {fileID: 11400000, guid: 7c8d1f311c149524d8bd8a4770a22f5c, type: 2}
     dropRate: 0.01
   money: 4
   exp: 4

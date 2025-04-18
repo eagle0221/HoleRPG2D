@@ -106,7 +106,7 @@ public class SaveManager : MonoBehaviour
             foreach (EquipmentData itemData in saveData.inventoryData.items)
             {
                 // ResourcesフォルダからEquipmentItemをロード
-                EquipmentItem item = Resources.Load<EquipmentItem>("Equipment/" + itemData.itemName);
+                EquipmentItem item = Resources.Load<EquipmentItem>("ScritableObject/Equipment/" + itemData.itemName);
                 if (item != null)
                 {
                     player.inventory.AddItem(item);
@@ -123,7 +123,7 @@ public class SaveManager : MonoBehaviour
                 if (saveData.equipments[i] != null)
                 {
                     // ResourcesフォルダからEquipmentItemをロード
-                    EquipmentItem item = Resources.Load<EquipmentItem>("Equipment/" + saveData.equipments[i].itemName);
+                    EquipmentItem item = Resources.Load<EquipmentItem>("ScritableObject/Equipment/" + saveData.equipments[i].itemName);
                     if (item != null)
                     {
                         player.equipments[i] = item;

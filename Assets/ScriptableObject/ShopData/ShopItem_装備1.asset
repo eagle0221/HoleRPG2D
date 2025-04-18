@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: "ShopItem_\u88C5\u50991"
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: a016306eb4594914fa58d3f0acd3b4a7, type: 2}
-  price: 1
+  price: 500

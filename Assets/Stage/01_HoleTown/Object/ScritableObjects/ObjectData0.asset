@@ -15,6 +15,14 @@ MonoBehaviour:
   objectName: "\u30C7\u30B6\u30FC\u30C8\u306E\u7570\u4E16\u754C"
   objectSprite: {fileID: 1929353096, guid: a0b81a7c32fe9b9409745516c6eccc5d, type: 3}
   moveSpeed: 5
+  maxHp: 50
+  hp: 50
+  absorbPower: 3
+  strength: 0
+  speed: 0
+  size: 0.1
+  attraction: 1
+  attackSpeed: 1
   shrinkSpeed: 2
   minScale: 0.1
   destroyDistance: 0.5

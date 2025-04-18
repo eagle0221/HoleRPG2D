@@ -15,8 +15,8 @@ MonoBehaviour:
   enemyName: "\u30B9\u30E9\u30A4\u30E0"
   enemySprite: {fileID: 7773383452084464067, guid: ae088cccad874014dbdda6da04a5e0c4, type: 3}
   enemyStatus:
-    maxHp: 30
-    hp: 30
+    maxHp: 15
+    hp: 15
     absorbPower: 5
     strength: 1
     speed: 2

@@ -17,7 +17,7 @@ public class PlayerStatus
     public int level = 1;
     public int statusPoint = 0;
     public int rebirthPoint = 0;
-    public static int REBIRTH_POINT = 5;  // 転生ポイントの広告倍率
+    public static int REBIRTH_POINT = 2;  // 転生ポイントの広告倍率
 
     // 転生時のリセット処理
     public void StatusInitialize()

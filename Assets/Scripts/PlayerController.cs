@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     public Canvas canvas; // Canvasへの参照を追加
     public GameObject rebirthPanel; // 転生パネル
     public Button rebirthButton; // 転生ボタンへの参照を追加
-    public Button adsButton;     // 広告を見て転生ボタン
+    public Button adsRebirthButton;     // 広告を見て転生ボタン
     public Button yesButton;     // 転生ボタンYesボタン
     public Button noButton;      // キャンセルボタン
     public GameObject equipPanel; // 装備画面
@@ -80,8 +80,8 @@ public class PlayerController : MonoBehaviour
         closeEquipButton.onClick.AddListener(CloseEquipPanel);
         // 転生ボタンの処理を追加
         rebirthButton.onClick.AddListener(OnRebirthButtonClicked);
-        adsButton.interactable = false;
-        adsButton.onClick.AddListener(OnAdsButtonClicked);
+        adsRebirthButton.interactable = false;
+        adsRebirthButton.onClick.AddListener(OnAdsButtonClicked);
         yesButton.onClick.AddListener(OnYesButtonClicked);
         noButton.onClick.AddListener(OnNoButtonClicked);
     }
@@ -336,7 +336,7 @@ public class PlayerController : MonoBehaviour
     public void OnRebirthButtonClicked()
     {
         rebirthPanel.SetActive(true);
-        adsButton.interactable = admobUnitReward.IsReady;
+        adsRebirthButton.interactable = admobUnitReward.IsReady;
         Debug.Log((int)Mathf.Floor(GameManager.Instance.trackRecord.RebirthCount/10));
     }
 
@@ -354,7 +354,7 @@ public class PlayerController : MonoBehaviour
                     AdsRebirth();
                 }
             });
-            adsButton.interactable = false;
+            adsRebirthButton.interactable = false;
         }
         else
         {
@@ -396,6 +396,10 @@ public class PlayerController : MonoBehaviour
         status.ResetForRebirth();
         status.rebirthPoint++;
         status.statusPoint += status.rebirthPoint + (int)Mathf.Floor(GameManager.Instance.trackRecord.RebirthCount/10); // 転生ポイントをステータスポイントに加算
+        for (int i = 0; i < equipments.Length; i++)
+        {
+            ApplyEquipmentEffect(equipments[i]);
+        }
     }
 
     private void OnNoButtonClicked()
@@ -454,7 +458,7 @@ public class PlayerController : MonoBehaviour
                     break;
                 case "Size":
                     status.size += 0.1f; // 1ずつ増加
-                    status.size = Mathf.Clamp(status.size, 1f, 500f); // 最大値を500に制限
+                    status.size = Mathf.Clamp(status.size, 0.1f, 500f); // 最大値を500に制限
                     UpdatePlayerStatus(); // サイズ変更を反映
                     break;
                 case "Attraction":

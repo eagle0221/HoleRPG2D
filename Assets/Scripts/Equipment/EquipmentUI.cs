@@ -46,8 +46,10 @@ public class EquipmentUI : MonoBehaviour
         {
             GameObject buttonObject = Instantiate(itemButtonPrefab, itemListContent);
             Button button = buttonObject.GetComponentInChildren<Button>();
+            Image itemIcon = buttonObject.transform.Find("ItemIcon").GetComponent<Image>();
             TextMeshProUGUI itemNameText = buttonObject.transform.Find("ItemNameText").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI itemEffectText = buttonObject.transform.Find("ItemEffectText").GetComponent<TextMeshProUGUI>();
+            itemIcon.sprite = item.itemIcon;
             itemNameText.text = item.itemName;
             itemEffectText.text = item.effectDescription;
             button.onClick.AddListener(() => SelectItem(item));
