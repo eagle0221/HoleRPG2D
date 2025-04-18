@@ -144,26 +144,55 @@ public class PlayerController : MonoBehaviour
 
     void HandleInput()
     {
-        // キーボード入力
+        // キーボード入力 (Fallback)
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
         moveDirection = new Vector2(moveX, moveY).normalized;
 
-        // スマホ入力
+        // スマホ入力 (Overrides keyboard if active)
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
+
+            switch (touch.phase)
             {
-                touchStartPos = touch.position;
-            }
-            else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Ended)
-            {
-                touchEndPos = touch.position;
-                Vector2 swipeDirection = (touchEndPos - touchStartPos).normalized;
-                moveDirection = swipeDirection;
+                case TouchPhase.Began:
+                    touchStartPos = touch.position;
+                    // タッチ開始時に移動をリセットするかどうかは設計次第
+                    // moveDirection = Vector2.zero;
+                    break;
+
+                case TouchPhase.Moved:
+                case TouchPhase.Stationary: // Stationary (ホールド) でも方向を計算
+                    touchEndPos = touch.position;
+                    // タッチ開始位置から現在の位置へのベクトルを計算
+                    Vector2 currentDirection = (touchEndPos - touchStartPos);
+
+                    // 一定以上の距離を動かした場合のみ移動方向として採用する（デッドゾーン）
+                    float deadZoneRadiusSqr = 10f * 10f; // 例: 10ピクセルの半径（2乗で比較）
+                    if (currentDirection.sqrMagnitude > deadZoneRadiusSqr)
+                    {
+                        moveDirection = currentDirection.normalized;
+                    }
+                    else
+                    {
+                        // デッドゾーン内なら移動しない（またはキーボード入力に戻す）
+                        // moveDirection = Vector2.zero; // ホールド開始時にピタッと止めたい場合
+                    }
+                    break;
+
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+                    // タッチ終了時に移動を停止させるか、キーボード入力に戻す
+                    // moveDirection = Vector2.zero; // タッチ終了で必ず止めたい場合
+                    // 現在はキーボード入力が fallback する形になっている
+                    break;
             }
         }
+        // else // タッチ入力がない場合はキーボード入力がそのまま使われる
+        // {
+        //     // 必要であれば moveDirection = Vector2.zero; など
+        // }
     }
 
     void MovePlayer()
