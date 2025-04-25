@@ -322,7 +322,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u300C\u4F01\u753B\u5236\u4F5C\u300D\nXXXXX\n\n\u203B\u4EE5\u4E0B\u656C\u79F0\u7565\n\u300CUI\u30FB\u7D20\u6750\u300D\nXXXX\nXXXX\nXXXX\nXXXX\nXXXX\nXXXX\n\n\u300C\u97F3\u697D\u30FBSE\u300D\nXXXX\nXXXX\nXXXX\nXXXX\nXXXX\n"
+  m_text: "\u4F5C\u8005\uFF1AUniK2\n\n\u30B0\u30E9\u30D5\u30A3\u30C3\u30AF\r\n\u3074\u307D\u3084\u5009\u5EAB\u3000\u69D8\n\r\nREFMAP\u3000\u69D8\n(http://refmap.wixsite.com/fsm-material)\r\n\n\u3044\u3089\u3059\u3068\u3084\u3000\u69D8\r\n\r\nBGM/SE\r\n\u9B54\u738B\u9B42\u3000\u69D8\r\n\n\u52B9\u679C\u97F3\u30E9\u30DC\u3000\u69D8\r\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c8ccd8b044de8bd42b1aba46c0ddee8f, type: 2}
   m_sharedMaterial: {fileID: 357608092962277, guid: c8ccd8b044de8bd42b1aba46c0ddee8f, type: 2}

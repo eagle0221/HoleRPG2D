@@ -94,6 +94,11 @@ public class PlayerLose : MonoBehaviour
         // プレイヤーステータスの初期化
         playerController.status.StatusInitialize();
         playerController.status.statusPoint += playerController.status.rebirthPoint; // 転生ポイントをステータスポイントに加算
+        // 装備分のステータスを加算
+        foreach(EquipmentItem item in playerController.equipments)
+        {
+            playerController.ApplyEquipmentEffect(item);
+        }
 
         // 既に出現していたオブジェクトを削除
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("AbsorbableObject"))
@@ -119,6 +124,7 @@ public class PlayerLose : MonoBehaviour
 
         HideTransitionPanel();
         deathFlg = false;
+        playerController.UpdatePlayerStatus();
     }
 
     public void LoadMainField()

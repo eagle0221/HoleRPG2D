@@ -159,6 +159,8 @@ public class SaveManager : MonoBehaviour
                 }
             }
 
+            player.UpdatePlayerStatus();
+
             Debug.Log("セーブデータがロードされました。");
             Debug.Log(JsonUtility.ToJson(saveData));
         }

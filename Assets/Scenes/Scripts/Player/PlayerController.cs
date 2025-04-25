@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using Unity.IO.LowLevel.Unsafe;
 
 public class PlayerController : MonoBehaviour
 {
@@ -568,7 +569,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // 装備効果を適用
-    void ApplyEquipmentEffect(EquipmentItem item)
+    public void ApplyEquipmentEffect(EquipmentItem item)
     {
         switch (item.equipmentType)
         {

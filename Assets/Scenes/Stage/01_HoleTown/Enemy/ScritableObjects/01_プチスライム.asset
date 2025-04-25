@@ -27,7 +27,7 @@ MonoBehaviour:
     isBoss: 0
   dropItems:
   - item: {fileID: 11400000, guid: aec651bb68dd8a94baa5bc220e09e0ce, type: 2}
-    dropRate: 1
+    dropRate: 0.01
   money: 2
   exp: 1
   isBoss: 0
