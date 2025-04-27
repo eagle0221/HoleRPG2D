@@ -31,6 +31,11 @@ public class NotificationWindow : MonoBehaviour
         StreamReader streamReader;
 
         // Jsonデータ取得
+        if (!File.Exists(JSON_NOTIFICATION))
+        {
+            Debug.LogError("JSON file not found: " + JSON_NOTIFICATION);
+            return;
+        }
         streamReader = new StreamReader(JSON_NOTIFICATION, false);
         jsonData = streamReader.ReadToEnd();
         streamReader.Close();
