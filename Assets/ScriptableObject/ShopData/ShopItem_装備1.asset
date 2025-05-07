@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8908c053578bb4e846db434211c94d, type: 3}
   m_Name: "ShopItem_\u88C5\u50991"
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: a016306eb4594914fa58d3f0acd3b4a7, type: 2}
+  item: {fileID: 11400000, guid: aec651bb68dd8a94baa5bc220e09e0ce, type: 2}
   price: 500
